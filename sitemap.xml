@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/html1/love.html</loc>
+    <lastmod>2014-11-27T15:54:05.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2014/11/27/Eclipse%E7%9A%84-Unhandled-event-loop-exception%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2014-11-27T15:12:22.000Z</lastmod>
   </url>
