@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SharedPreferences回顾 | Jackhai 从开始到现在</title>
+  <meta name="author" content="李振海">
+  
+  <meta name="description" content="可能孤独，但从不寂寞。记住：你应该努力去追求幸福。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="SharedPreferences回顾"/>
+  <meta property="og:site_name" content="Jackhai 从开始到现在"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Jackhai 从开始到现在" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-56567610-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe5f997a31fb87652c76a3a8cdb3e4cf2' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Jackhai 从开始到现在</a></h1>
+  <h2><a href="/">对你我而言，遇到爱遇到性都不稀罕。稀罕的是遇到了解。 --- 雨季一过，交配的季节又到了</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-23T13:11:45.000Z"><a href="/2014/11/23/SharedPreferences回顾/">11月 23 2014</a></time>
+      
+      
+  
+    <h1 class="title">SharedPreferences回顾</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>做软件开发应该都知道，很多软件会有配置文件，里面存放这程序运行当中的各个属性值，由于其配置信息并不多，如果采用数据库来存放并不划算，因为数据库连接跟操作等耗时大大影响了程序的效率，因此我们使用键值这种一一对应的关系来存放这些配置信息。SharedPreferences正是Android中用于实现这种存储方式的技术。<br><a id="more"></a><br>SharedPreferences的使用非常简单，能够轻松的存放数据和读取数据。SharedPreferences只能保存简单类型的数据，例如String、int等。一般会将复杂类型的数据转换成Base64编码，然后将转换后的数据以字符串的形式保存在 XML文件中，再用SharedPreferences保存。</p>
+<p>使用SharedPreferences保存key-value对的步骤如下：<br>　　（1）使用Activity类的getSharedPreferences方法获得SharedPreferences对象，其中存储key-value的文件的名称由getSharedPreferences方法的第一个参数指定。<br>　　（2）使用SharedPreferences接口的edit获得SharedPreferences.Editor对象。<br>　　（3）通过SharedPreferences.Editor接口的putXxx方法保存key-value对。其中Xxx表示不同的数据类型。例如：字符串类型的value需要用putString方法。<br>　　（4）通过SharedPreferences.Editor接口的commit方法保存key-value对。commit方法相当于数据库事务中的提交（commit）操作。</p>
+<p><strong>具体代码的书写流程为：</strong></p>
+<p>A、存放数据信息<br>1、打开Preferences，名称为setting，如果存在则打开它，否则创建新的Preferences</p>
+<pre><code><span class="attribute">SharedPreferences settings </span>=<span class="string"> getSharedPreferences(“setting”, 0);</span>
+</code></pre><p>2、让setting处于编辑状态</p>
+<pre><code><span class="attribute">SharedPreferences.Editor editor </span>=<span class="string"> settings.edit();</span>
+</code></pre><p>3、存放数据</p>
+<pre><code><span class="keyword">editor</span>.putString(“name”,”ATAAW”);
+<span class="keyword">editor</span>.putString(“URL”,”ATAAW.COM”);
+</code></pre><p>4、完成提交</p>
+<pre><code><span class="keyword">editor</span>.commit();
+</code></pre><p>B、读取数据信息<br>1、获取Preferences</p>
+<pre><code><span class="attribute">SharedPreferences settings </span>=<span class="string"> getSharedPreferences(“setting”, 0);</span>
+</code></pre><p>2、取出数据</p>
+<pre><code><span class="built_in">String</span> name = settings.getString(“name”,”默认值”);
+<span class="built_in">String</span> url = setting.getString(“URL”,”<span class="keyword">default</span>”);
+</code></pre><p>以上就是Android中SharedPreferences的使用方法，其中创建的Preferences文件存放位置可以在Eclipse中查看：<br>DDMS-&gt;File Explorer/data/data/&lt; package name&gt;/shared_prefs/下，上例中是此目录下的setting.xml文件。</p>
+<p>注意：</p>
+<p>SharedPreferences是一个接口，程序是无法创建SharedPreferences实例的，可以通过Context.getSharedPreferences(String name.int mode)来得到一个SharedPreferences实例：<br>　　name：是指文件名称，不需要加后缀.xml，系统会自动为我们添加上。一般这个文件存储在/data/data/<package name="">/ shared_prefs下(这个面试常问到)<br>　　mode：是指定读写方式，其值有三种，分别为：<br>　　  Context.MODE_PRIVATE：指定该SharedPreferences数据只能被本应用程序读、写<br>　　  Context.MODE_WORLD_READABLE：指定该SharedPreferences数据能被其他应用程序读，但不能写<br>　　  Context.MODE_WORLD_WRITEABLE：指定该SharedPreferences数据能被其他应用程序读写。</package></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2014/11/25/又重装系统/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2014/11/21/使用gitcafe同步github/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"jackhai"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>4</small></li>
+  
+    <li><a href="/categories/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/gitcafe/">gitcafe</a><small>1</small></li>
+  
+    <li><a href="/categories/转载/">转载</a><small>2</small></li>
+  
+    <li><a href="/categories/随记/">随记</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>2</small></li>
+  
+    <li><a href="/tags/ContentProvider/">ContentProvider</a><small>1</small></li>
+  
+    <li><a href="/tags/Handler/">Handler</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Intent/">Intent</a><small>1</small></li>
+  
+    <li><a href="/tags/LifeCycle/">LifeCycle</a><small>1</small></li>
+  
+    <li><a href="/tags/ListView/">ListView</a><small>1</small></li>
+  
+    <li><a href="/tags/Looper/">Looper</a><small>1</small></li>
+  
+    <li><a href="/tags/Message/">Message</a><small>1</small></li>
+  
+    <li><a href="/tags/MessageQueue/">MessageQueue</a><small>1</small></li>
+  
+    <li><a href="/tags/SSD/">SSD</a><small>1</small></li>
+  
+    <li><a href="/tags/Shelves-app/">Shelves app</a><small>1</small></li>
+  
+    <li><a href="/tags/Uri/">Uri</a><small>1</small></li>
+  
+    <li><a href="/tags/四大组件/">四大组件</a><small>1</small></li>
+  
+    <li><a href="/tags/回顾总结/">回顾总结</a><small>1</small></li>
+  
+    <li><a href="/tags/异步消息/">异步消息</a><small>1</small></li>
+  
+    <li><a href="/tags/文章/">文章</a><small>1</small></li>
+  
+    <li><a href="/tags/生命周期/">生命周期</a><small>1</small></li>
+  
+    <li><a href="/tags/读书/">读书</a><small>1</small></li>
+  
+    <li><a href="/tags/重装系统/">重装系统</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://jackhai.diandian.com/" title="点点">点点</a></li>
+<li><a href="http://jackhai6.lofter.com/" title=">Lofter">Lofter以前</a></li>
+<li><a href="http://jackhai789.lofter.com/" title="Lofter">Lofter现在</a></li>
+<li><a href="http://www.cnblogs.com/jackhai9/" title="博客园">博客园</a></li>
+<li><a href="http://www.u148.net/u/167902" title="U148">U148</a></li>
+<li><a href="http://jackhai.wordpress.com/" title="WordPress">WordPress</a></li>
+<li><a href="http://jackhai9.blogspot.com/" title="Blogger">Blogger</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 李振海
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

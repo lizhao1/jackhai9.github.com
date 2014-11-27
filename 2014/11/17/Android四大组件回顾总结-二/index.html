@@ -1,0 +1,475 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android四大组件回顾总结(二) | Jackhai 从开始到现在</title>
+  <meta name="author" content="李振海">
+  
+  <meta name="description" content="可能孤独，但从不寂寞。记住：你应该努力去追求幸福。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Android四大组件回顾总结(二)"/>
+  <meta property="og:site_name" content="Jackhai 从开始到现在"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Jackhai 从开始到现在" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-56567610-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe5f997a31fb87652c76a3a8cdb3e4cf2' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Jackhai 从开始到现在</a></h1>
+  <h2><a href="/">对你我而言，遇到爱遇到性都不稀罕。稀罕的是遇到了解。 --- 雨季一过，交配的季节又到了</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-17T08:45:38.000Z"><a href="/2014/11/17/Android四大组件回顾总结-二/">11月 17 2014</a></time>
+      
+      
+  
+    <h1 class="title">Android四大组件回顾总结(二)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="二、四大组件的生命周期">二、四大组件的生命周期</h1>
+<p>介绍生命周期之前，先提一下任务的概念：</p>
+<p>任务其实就是activity的栈。它由一个或多个Activity组成，共同完成一个完整的用户体验，换句话说任务就是” 应用程序” <a id="more"></a>（可以是一个也可以是多个，比如假设你想让用户看到某个地方的街道地图。而已经存在一个具有此功能的activity了，那么你的activity所需要做的工作就是把请求信息放到一个Intent对象里面，并把它传递给startActivity()。于是地图浏览器就会显示那个地图。而当用户按下BACK键的时候，你的activity又会再一次的显示在屏幕上，此时任务是由2个应用程序中的相关activity组成的）。栈底的是启动整个任务的Activity，栈顶的是当前运行的用户可以交互的Activity，当一个activity启动另外一个的时候，新的activity就被压入栈，并成为当前运行的activity。而前一个activity仍保持在栈之中。当用户按下BACK键的时候，当前activity出栈，而前一个恢复为当前运行的activity。栈中保存的其实是对象，栈中的Activity永远不会重排，只会压入或弹出，所以如果发生了诸如需要多个地图浏览器的情况，就会使得一个任务中出现多个同一Activity子类的实例同时存在。</p>
+<p>任务中的所有activity是作为一个整体进行移动的。整个的任务（即activity栈）可以移到前台，或退至后台。举个例子说，比如当前任务在栈中存有四个activity──三个在当前activity之下。当用户按下HOME键的时候，回到了应用程序加载器，然后选择了一个新的应用程序（也就是一个新任务）。则当前任务遁入后台，而新任务的根activity显示出来。然后，过了一小会儿，用户再次回到了应用程序加载器而又选择了前一个应用程序（上一个任务）。于是那个任务，带着它栈中所有的四个activity，再一次的到了前台。当用户按下BACK键的时候，屏幕不会显示出用户刚才离开的activity（上一个任务的根activity），取而代之，当前任务的栈中最上面的activity被弹出，而同一任务中的上一个activity显示了出来。</p>
+<blockquote>
+<p>Activity栈：先进后出规则</p>
+</blockquote>
+<p>Android系统是一个多任务(Multi-Task)的操作系统，可以在用手机听音乐的同时，也执行其他多个程序。每多执行一个应用程序，就会多耗费一些系统内存，当同时执行的程序过多，或是关闭的程序没有正确释放掉内存，系统就会觉得越来越慢，甚至不稳定。</p>
+<p>为了解决这个问题，Android引入了一个新的机制 — 生命周期(Life Cycle)。</p>
+<p><code>Android应用程序的生命周期是由Android框架进行管理，而不是由应用程序直接控制。</code>通常，每一个应用程序（入口一般会是一个Activity 的onCreate 方法），都会产生一个进程(Process)。当系统内存即将不足的时候，会依照优先级自动进行进程(process)的回收。不管是使用者或开发者，都无法确定应用程序何时会被回收。所以为了很好的防止数据丢失和其他问题，了解生命周期很重要。</p>
+<h2 id="Activity生命周期">Activity生命周期</h2>
+<p><img src="http://jackhai.qiniudn.com/activitylifecycle.jpg" alt="生命周期"></p>
+<h4 id="Activity整个生命周期的4种状态、7个重要方法和3个嵌套循环">Activity整个生命周期的4种状态、7个重要方法和3个嵌套循环</h4>
+<p> <strong>4种状态</strong></p>
+<ul>
+<li>1) 活动(Active/Running)状态</li>
+</ul>
+<p>当Activity运行在屏幕前台(处于当前任务活动栈的最上面),此时它获取了焦点能响应用户的操作,属于运行状态，同一个时刻只会有一个Activity 处于活动(Active)或运行(Running)状态</p>
+<ul>
+<li>2) 暂停(Paused)状态</li>
+</ul>
+<p>当Activity失去焦点但仍对用户可见(如在它之上有另一个透明的Activity或Toast、AlertDialog等弹出窗口时)它处于暂停状态。暂停的Activity仍然是存活状态(它保留着所有的状态和成员信息并保持和窗口管理器的连接),但是当系统内存极小时可以被系统杀掉</p>
+<ul>
+<li>3) 停止(Stopped)状态</li>
+</ul>
+<p>完全被另一个Activity遮挡时处于停止状态,它仍然保留着所有的状态和成员信息。只是对用户不可见,当其他地方需要内存时它往往被系统杀掉</p>
+<ul>
+<li>4) 非活动(Dead)状态</li>
+</ul>
+<p>Activity 尚未被启动、已经被手动终止，或已经被系统回收时处于非活动的状态，要手动终止Activity，可以在程序中调用”finish”方法。</p>
+<p>如果是（按根据内存不足时的回收规则）被系统回收，可能是因为内存不足了。</p>
+<p>内存不足时，Dalvak虚拟机会根据其内存回收规则来回收内存：</p>
+<pre><code>  <span class="number">1.</span>先回收与其他Activity或Service/Intent Receiver无关的进程(即优先回收独立的Activity)因此建议,我们的一些(耗时)后台操作，最好是做成Service的形式
+
+  <span class="number">2.</span>不可见(处于Stopped状态的)Activity
+
+  <span class="number">3.</span>Service进程(除非真的没有内存可用时会被销毁)
+
+  <span class="number">4.</span>非活动的可见的(Paused状态的)Activity
+
+  <span class="number">5.</span>当前正在运行(<span class="keyword">Active</span>/Running状态的)Activity
+</code></pre><p> <strong>7个重要方法</strong></p>
+<p>当Activity从一种状态进入另一状态时系统会自动调用下面相应的方法来通知用户这种变化:</p>
+<p>当Activity第一次被实例化的时候系统会调用,整个生命周期只调用1次如下方法。通常用于初始化设置: 1、为Activity设置所要使用的布局文件；2、为按钮绑定监听器等静态的设置操作。</p>
+<pre><code>  <span class="function">onCreate</span>(Bundle savedInstanceState);
+</code></pre><p>当Activity可见未获得用户焦点不能交互时系统会调用：</p>
+<pre><code>  <span class="function">onStart</span>();
+</code></pre><p>当Activity已经停止然后重新被启动时系统会调用：</p>
+<pre><code>  <span class="function">onRestart</span>();
+</code></pre><p>当Activity可见且获得用户焦点能交互时系统会调用：</p>
+<pre><code>  <span class="function">onResume</span>();
+</code></pre><p>当系统启动另外一个新的Activity时,在新Activity启动之前被系统调用保存现有的Activity中的持久数据、停止动画等,这个实现方法必须非常快。当系统而不是用户自己出于回收内存时，关闭了activity之后。用户会期望当他再次回到这个activity的时候，它仍保持着上次离开时的样子。此时用到了onSaveInstanceState()方法，onSaveInstanceState()用来保存Activity被杀之前的状态,在onPause()之前被触发,当系统为了节省内存销毁了Activity(用户本不想销毁)时就需要重写这个方法了,当此Activity再次被实例化时会通过onCreate(Bundle savedInstanceState)将已经保存的临时状态数据传入。因为onSaveInstanceState()方法<strong>不总是</strong>被调用,触发条件为(按下HOME键,按下电源按键关闭屏幕,横竖屏切换情况下),你应该仅重写onSaveInstanceState()来记录activity的临时状态，而不是持久的数据。记录持久数据的话应该使用onPause()。</p>
+<pre><code>  <span class="function">onPause</span>();
+</code></pre><p>当Activity被新的Activity完全覆盖不可见时被系统调用：</p>
+<pre><code>  <span class="function">onStop</span>();
+</code></pre><p>当Activity(用户调用finish()或系统由于内存不足)被系统销毁杀掉时系统调用：（整个生命周期只调用1次，用来释放onCreate()方法中创建的资源,如结束线程等）</p>
+<pre><code>  <span class="function">onDestroy</span>();
+</code></pre><p> <strong>3个嵌套循环</strong></p>
+<pre><code> 1<span class="class">.Activity</span>完整的生命周期<span class="value">:从第一次调用<span class="function">onCreate</span>()开始直到调用<span class="function">onDestroy</span>()结束
+ <span class="number">2</span>.Activity的可视生命周期:从调用<span class="function">onStart</span>()到相应的调用<span class="function">onStop</span>()
+   在这两个方法之间,可以保持显示Activity所需要的资源。如在<span class="function">onStart</span>()中注册一个广播接收者监听影响你的UI的改变,在<span class="function">onStop</span>()中注销。
+ <span class="number">3</span>.Activity的前台生命周期:从调用<span class="function">onResume</span>()到相应的调用<span class="function">onPause</span>()。</span>
+</code></pre><p>举例说明:</p>
+<p>例1：有3个Acitivity,分别用One,Two(透明的),Three表示,One是应用启动时的主Activity</p>
+<pre><code>  启动第一个界面Activity One时,它的次序是
+         onCreate (ONE) - onStart (ONE) - <span class="function">onResume</span>(ONE)
+
+  点"打开透明Activity"按钮时,这时走的次序是
+         <span class="function">onPause</span>(ONE) - <span class="function">onCreate</span>(TWO) - <span class="function">onStart</span>(TWO) - <span class="function">onResume</span>(TWO)
+
+  再点back回到第一个界面,Two会被杀这时走的次序是
+         <span class="function">onPause</span>(TWO) - <span class="function">onActivityResult</span>(ONE) - <span class="function">onResume</span>(ONE) - <span class="function">onStop</span>(TWO) - <span class="function">onDestroy</span>(TWO)
+
+  点"打开全屏Activity"按钮时,这时走的次序是
+         <span class="function">onPause</span>(ONE) - <span class="function">onCreate</span>(Three) - <span class="function">onStart</span>(Three) - <span class="function">onResume</span>(Three) - <span class="function">onStop</span>(ONE)
+
+  再点back回到第一个界面,Three会被杀这时走的次序是
+         <span class="function">onPause</span>(Three) - <span class="function">onActivityResult</span>(ONE) - <span class="function">onRestart</span>(ONE) - <span class="function">onStart</span>(ONE)- <span class="function">onResume</span>(ONE) - <span class="function">onStop</span>(Three) - <span class="function">onDestroy</span>(Three)
+
+  再点back退出应用时,它的次序是
+         <span class="function">onPause</span>(ONE) - <span class="function">onStop</span>(ONE) - <span class="function">onDestroy</span>(ONE)           
+</code></pre><p>例2：横竖屏切换时Activity的生命周期</p>
+<pre><code>  <span class="number">1</span>、新建一个Activity，并把各个生命周期打印出来
+
+  <span class="number">2</span>、运行Activity，得到如下信息
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+
+  <span class="number">3</span>、按crtl+f12切换成横屏时
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+
+  <span class="number">4</span>、再按crtl+f12切换成竖屏时，发现打印了两次相同的<span class="built_in">log</span>
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+
+  <span class="number">5</span>、修改AndroidManifest.xml，把该Activity添加android:configChanges=<span class="string">"orientation"</span>，执行步骤<span class="number">3</span>
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+
+  <span class="number">6</span>、再执行步骤<span class="number">4</span>，发现不会再打印相同信息，但多打印了一行onConfigChanged
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+  onConfigurationChanged<span class="comment">--&gt;</span>
+
+  <span class="number">7</span>、把步骤<span class="number">5</span>的android:configChanges=<span class="string">"orientation"</span> 改成 android:configChanges=<span class="string">"orientation|keyboardHidden"</span>，执行步骤<span class="number">3</span>
+  onConfigurationChanged<span class="comment">--&gt;</span>
+
+  <span class="number">8</span>、执行步骤<span class="number">4</span>
+  onConfigurationChanged<span class="comment">--&gt;</span>
+  onConfigurationChanged<span class="comment">--&gt;</span>
+</code></pre><p> 总结：</p>
+<p>1、不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次</p>
+<p>2、设置Activity的android:configChanges=”orientation”时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次</p>
+<p>3、设置Activity的android:configChanges=”orientation|keyboardHidden”时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法</p>
+<p><strong>总结一下整个Activity的生命周期</strong></p>
+<p>补充一点，当前Activity产生事件弹出Toast和AlertDialog的时候Activity的生命周期不会有改变。</p>
+<p>Activity运行时按下HOME键(跟被完全覆盖是一样的)：onSaveInstanceState —&gt; onPause —&gt; onStop，再次进入激活状态时： onRestart —&gt;onStart—-&gt;onResume</p>
+<h2 id="BroadcastReceive生命周期">BroadcastReceive生命周期</h2>
+<p>BroadcastReceive生命周期只有十秒左右，如果在 onReceive() 内做超过十秒内的事情，就会报ANR(Application No Response) 程序无响应的错误信息</p>
+<p>它的生命周期为从回调onReceive()方法开始到该方法返回结果后结束</p>
+<h2 id="Service服务生命周期">Service服务生命周期</h2>
+<p><img src="http://jackhai.qiniudn.com/service生命周期.jpg" alt="service生命周期"></p>
+<p>Service完整的生命周期:从调用onCreate()开始直到调用onDestroy()结束</p>
+<p>Service有两种使用方法：</p>
+<pre><code>  <span class="number">1</span>&gt;以调用<span class="keyword">Context</span>.startService()启动，而以调用<span class="keyword">Context</span>.stopService()结束
+  <span class="number">2</span>&gt;以调用<span class="keyword">Context</span>.bindService()方法建立，以调用<span class="keyword">Context</span>.unbindService()关闭
+</code></pre><p>service重要的生命周期方法</p>
+<p>当用户调用startService()或bindService()时，Service第一次被实例化的时候系统会调用,整个生命周期只调用1次这个方法，通常用于初始化设置：（注意：多次调用startService()或bindService()方法不会多次触发onCreate()方法）</p>
+<pre><code>  <span class="title">void</span> <span class="built_in">on</span>Create()
+</code></pre><p>当用户调用stopService()或unbindService()来停止服务时被系统调用,（整个生命周期只调用1次）用来释放onCreate()方法中创建的资源:</p>
+<pre><code>  <span class="title">void</span> <span class="built_in">on</span>Destroy()
+</code></pre><p>通过startService()方法启动的服务:（初始化结束后系统会调用该方法，用于处理传递给startService()的Intent对象。如音乐服务会打开Intent 来探明将要播放哪首音乐，并开始播放。注意：多次调用startService()方法会多次触发onStart()方法）</p>
+<pre><code>  <span class="title">void</span> <span class="built_in">on</span>Start(Intent intent)
+</code></pre><p>通过bindService()方法启动的服务:（初始化结束后系统会调用该方法，用来绑定传递给bindService 的Intent 的对象。注意：多次调用bindService（）时，如果该服务已启动则不会再触发此方法）</p>
+<pre><code>  <span class="title">IBinder</span> <span class="built_in">on</span>Bind(Intent intent)
+</code></pre><p>用户调用unbindService()时系统调用此方法:（Intent对象同样传递给该方法）</p>
+<pre><code>  <span class="title">boolean</span> <span class="built_in">on</span>Unbind(Intent intent)
+</code></pre><p>如果有新的客户端连接至该服务，只有当旧的调用onUnbind()后，新的才会调用该方法：</p>
+<pre><code>  <span class="title">void</span> <span class="built_in">on</span>Rebind(Intent intent)
+</code></pre><p>补充：onCreate(Bundle savedInstanceState)与onSaveInstanceState(Bundle savedInstanceState)配合使用，见如下代码，达到显示activity被系统杀死前的状态：</p>
+<pre><code>  <span class="annotation">@Override</span>
+  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span>(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    <span class="keyword">if</span> (<span class="keyword">null</span> != savedInstanceState) {
+        String _userid = savedInstanceState.getString(<span class="string">"StrUserId"</span>);
+        String _uid = savedInstanceState.getString(<span class="string">"StrUid"</span>);
+        String _serverid = savedInstanceState.getString(<span class="string">"StrServerId"</span>);
+        String _servername = savedInstanceState.getString(<span class="string">"StrServerName"</span>);
+        <span class="keyword">int</span> _rate = savedInstanceState.getInt(<span class="string">"StrRate"</span>);
+        <span class="comment">//updateUserId(_userid);</span>
+        <span class="comment">//updateUId(_uid);</span>
+        <span class="comment">//updateServerId(_serverid);</span>
+        <span class="comment">//updateUserServer(_servername);</span>
+        <span class="comment">//updateRate(_rate);</span>
+    }
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span>(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onSaveInstanceState(savedInstanceState);
+    savedInstanceState.putString(<span class="string">"StrUserId"</span>, getUserId());
+    savedInstanceState.putString(<span class="string">"StrUid"</span>, getUId());
+    savedInstanceState.putString(<span class="string">"StrServerId"</span>, getServerId());
+    savedInstanceState.putString(<span class="string">"StrServerName"</span>, getServerName());
+    savedInstanceState.putInt(<span class="string">"StrRate"</span>, getRate());
+  }
+</code></pre><p>注：</p>
+<p>ContentProvider的介绍见<a href="http://jackhai9.github.io/2014/11/17/Android%E4%B9%8BContentProvider/" title="这里" target="_blank" rel="external">这里</a></p>
+<p><strong>引发activity摧毁和重建的其他情形</strong><br>除了系统处于内存不足的原因会摧毁activity之外, 某些系统设置的改变也会导致activity的摧毁和重建. 例如改变屏幕方向(见上例), 改变设备语言设定, 键盘弹出等.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Android/">Android</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/LifeCycle/">LifeCycle</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2014/11/20/加装SSD-重装MSDN英文版win7系统/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2014/11/17/Android之ContentProvider/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"jackhai"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>4</small></li>
+  
+    <li><a href="/categories/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/gitcafe/">gitcafe</a><small>1</small></li>
+  
+    <li><a href="/categories/转载/">转载</a><small>2</small></li>
+  
+    <li><a href="/categories/随记/">随记</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>2</small></li>
+  
+    <li><a href="/tags/ContentProvider/">ContentProvider</a><small>1</small></li>
+  
+    <li><a href="/tags/Handler/">Handler</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Intent/">Intent</a><small>1</small></li>
+  
+    <li><a href="/tags/LifeCycle/">LifeCycle</a><small>1</small></li>
+  
+    <li><a href="/tags/ListView/">ListView</a><small>1</small></li>
+  
+    <li><a href="/tags/Looper/">Looper</a><small>1</small></li>
+  
+    <li><a href="/tags/Message/">Message</a><small>1</small></li>
+  
+    <li><a href="/tags/MessageQueue/">MessageQueue</a><small>1</small></li>
+  
+    <li><a href="/tags/SSD/">SSD</a><small>1</small></li>
+  
+    <li><a href="/tags/Shelves-app/">Shelves app</a><small>1</small></li>
+  
+    <li><a href="/tags/Uri/">Uri</a><small>1</small></li>
+  
+    <li><a href="/tags/四大组件/">四大组件</a><small>1</small></li>
+  
+    <li><a href="/tags/回顾总结/">回顾总结</a><small>1</small></li>
+  
+    <li><a href="/tags/异步消息/">异步消息</a><small>1</small></li>
+  
+    <li><a href="/tags/文章/">文章</a><small>1</small></li>
+  
+    <li><a href="/tags/生命周期/">生命周期</a><small>1</small></li>
+  
+    <li><a href="/tags/读书/">读书</a><small>1</small></li>
+  
+    <li><a href="/tags/重装系统/">重装系统</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://jackhai.diandian.com/" title="点点">点点</a></li>
+<li><a href="http://jackhai6.lofter.com/" title=">Lofter">Lofter以前</a></li>
+<li><a href="http://jackhai789.lofter.com/" title="Lofter">Lofter现在</a></li>
+<li><a href="http://www.cnblogs.com/jackhai9/" title="博客园">博客园</a></li>
+<li><a href="http://www.u148.net/u/167902" title="U148">U148</a></li>
+<li><a href="http://jackhai.wordpress.com/" title="WordPress">WordPress</a></li>
+<li><a href="http://jackhai9.blogspot.com/" title="Blogger">Blogger</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 李振海
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

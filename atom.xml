@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jackhai 从开始到现在]]></title>
+  <subtitle><![CDATA[对你我而言，遇到爱遇到性都不稀罕。稀罕的是遇到了解。 --- 雨季一过，交配的季节又到了]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2014-11-27T16:12:12.022Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name><![CDATA[李振海]]></name>
+    <email><![CDATA[jackhai789@gmail.com]]></email>
+  </author>
+  
+  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Eclipse的 Unhandled event loop exception问题]]></title>
+    <link href="http://yoursite.com/2014/11/27/Eclipse%E7%9A%84-Unhandled-event-loop-exception%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2014/11/27/Eclipse的-Unhandled-event-loop-exception问题/</id>
+    <published>2014-11-27T12:48:06.000Z</published>
+    <updated>2014-11-27T15:12:22.000Z</updated>
+    <content type="html"><![CDATA[<p>以前从没遇到过这种问题,发现自重装系统后,就开始触发这个bug了.</p>
+<p>从error-log等视图里点击打开的java文件或者xml文件时,出现”unhandled event loop exception”错误,出错信息如下:<br><a id="more"></a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Exception Stack Trace:</div><div class="line">org.eclipse.swt.SWTError: No more handles</div><div class="line">at org.eclipse.swt.SWT.error(SWT.java:<span class="number">4387</span>)</div><div class="line">at org.eclipse.swt.SWT.error(SWT.java:<span class="number">4276</span>)</div><div class="line">at org.eclipse.swt.SWT.error(SWT.java:<span class="number">4247</span>)</div><div class="line">at org.eclipse.swt.widgets.Widget.error(Widget.java:<span class="number">468</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.createHandle(Control.java:<span class="number">704</span>)</div><div class="line">at org.eclipse.swt.widgets.Label.createHandle(Label.java:<span class="number">199</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.createWidget(Control.java:<span class="number">744</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.&lt;init&gt;(Control.java:<span class="number">112</span>)</div><div class="line">at org.eclipse.swt.widgets.Label.&lt;init&gt;(Label.java:<span class="number">101</span>)</div><div class="line">at org.eclipse.ui.texteditor.StatusLineContributionItem.fill(StatusLineContributionItem.java:<span class="number">182</span>)</div><div class="line">at org.eclipse.jface.action.SubContributionItem.fill(SubContributionItem.java:<span class="number">59</span>)</div><div class="line">at org.eclipse.jface.action.StatusLineManager.update(StatusLineManager.java:<span class="number">327</span>)</div><div class="line">at org.eclipse.ui.internal.WorkbenchPage.updateActivations(WorkbenchPage.java:<span class="number">265</span>)</div><div class="line">at org.eclipse.ui.internal.WorkbenchPage.access$<span class="number">15</span>(WorkbenchPage.java:<span class="number">243</span>)</div><div class="line">at org.eclipse.ui.internal.WorkbenchPage$E4PartListener.partActivated(WorkbenchPage.java:<span class="number">172</span>)</div><div class="line">at org.eclipse.e4.ui.internal.workbench.PartServiceImpl$<span class="number">2.</span>run(PartServiceImpl.java:<span class="number">193</span>)</div><div class="line">at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:<span class="number">42</span>)</div><div class="line">at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.firePartActivated(PartServiceImpl.java:<span class="number">191</span>)</div><div class="line">at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.activate(PartServiceImpl.java:<span class="number">596</span>)</div><div class="line">at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.activate(PartServiceImpl.java:<span class="number">549</span>)</div><div class="line">at org.eclipse.e4.ui.internal.workbench.swt.AbstractPartRenderer.activate(AbstractPartRenderer.java:<span class="number">105</span>)</div><div class="line">at org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer$<span class="number">1.</span>handleEvent(ContributedPartRenderer.java:<span class="number">61</span>)</div><div class="line">at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:<span class="number">84</span>)</div><div class="line">at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:<span class="number">1053</span>)</div><div class="line">at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:<span class="number">1077</span>)</div><div class="line">at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:<span class="number">1058</span>)</div><div class="line">at org.eclipse.swt.widgets.Shell.setActiveControl(Shell.java:<span class="number">1447</span>)</div><div class="line">at org.eclipse.swt.widgets.Shell.WM_MOUSEACTIVATE(Shell.java:<span class="number">2328</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4572</span>)</div><div class="line">at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:<span class="number">341</span>)</div><div class="line">at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:<span class="number">1627</span>)</div><div class="line">at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:<span class="number">2069</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:<span class="number">341</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:<span class="number">2541</span>)</div><div class="line">at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:<span class="number">80</span>)</div><div class="line">at org.eclipse.swt.widgets.Control.windowProc(Control.java:<span class="number">4623</span>)</div><div class="line">at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:<span class="number">341</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.windowProc(Display.java:<span class="number">4989</span>)</div><div class="line">at org.eclipse.swt.internal.win32.OS.PeekMessageW(Native Method)</div><div class="line">at org.eclipse.swt.internal.win32.OS.PeekMessage(OS.java:<span class="number">3129</span>)</div><div class="line">at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:<span class="number">3753</span>)</div><div class="line">at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$<span class="number">9.</span>run(PartRenderingEngine.java:<span class="number">1053</span>)</div><div class="line">at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:<span class="number">332</span>)</div><div class="line">at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:<span class="number">942</span>)</div><div class="line">at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:<span class="number">86</span>)</div><div class="line">at org.eclipse.ui.internal.Workbench$<span class="number">5.</span>run(Workbench.java:<span class="number">588</span>)</div><div class="line">at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:<span class="number">332</span>)</div><div class="line">at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:<span class="number">543</span>)</div><div class="line">at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:<span class="number">149</span>)</div><div class="line">at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:<span class="number">124</span>)</div><div class="line">at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:<span class="number">196</span>)</div><div class="line">at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:<span class="number">110</span>)</div><div class="line">at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:<span class="number">79</span>)</div><div class="line">at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:<span class="number">353</span>)</div><div class="line">at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:<span class="number">180</span>)</div><div class="line">at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</div><div class="line">at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)</div><div class="line">at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)</div><div class="line">at java.lang.reflect.Method.invoke(Unknown Source)</div><div class="line">at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:<span class="number">629</span>)</div><div class="line">at org.eclipse.equinox.launcher.Main.basicRun(Main.java:<span class="number">584</span>)</div><div class="line">at org.eclipse.equinox.launcher.Main.run(Main.java:<span class="number">1438</span>)</div><div class="line">at org.eclipse.equinox.launcher.Main.main(Main.java:<span class="number">1414</span>)</div></pre></td></tr></table></figure>
+
+<p>网上搜索后找到<a href="http://www.eclipse.org/forums/index.php/t/496362/" target="_blank" rel="external">这个</a>.</p>
+<p>我的解决过程:</p>
+<p><del>解决方法: 重装了下jdk(没有重启机器)还是无效.然后,修改了workspace,重启机器,ok.发现,很多问题都可以通过修改workspace来解决,建议一个工程一个workspace. 上述方法无效！！ Google下发现好像是打开.java的默认编辑器在win7x64位的笔记本上有问题，解决方法：help-&gt;install new software，从<code>http://download.eclipse.org/windowbuilder/WB/release/R201309271200/4.3</code>下载windowbuilder，并把其设置为默认的.java编辑器。重启Eclipse后切换回.java文件时不出bug了,但是切换回.xml文件还是会触发这个bug。</del></p>
+<h4 id="最后的终极解决方法:"><strong>最后的终极解决方法:</strong></h4>
+<h4 id="更新_Win7_!_ok,问题解决!">更新 Win7 ! ok,问题解决!</h4>
+<p>(windows update了下win7,搞定！！所以：直接进行windows update，安装关于security的补丁！)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>以前从没遇到过这种问题,发现自重装系统后,就开始触发这个bug了.</p>
+<p>从error-log等视图里点击打开的java文件或者xml文件时,出现”unhandled event loop exception”错误,出错信息如下:<br>]]>
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[又重装系统...]]></title>
+    <link href="http://yoursite.com/2014/11/25/%E5%8F%88%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://yoursite.com/2014/11/25/又重装系统/</id>
+    <published>2014-11-25T15:02:32.000Z</published>
+    <updated>2014-11-25T15:03:38.000Z</updated>
+    <content type="html"><![CDATA[<p>Eclipse出问题+Chrome出问题，一气之下，重装系统！！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Eclipse出问题+Chrome出问题，一气之下，重装系统！！</p>
+]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[SharedPreferences回顾]]></title>
+    <link href="http://yoursite.com/2014/11/23/SharedPreferences%E5%9B%9E%E9%A1%BE/"/>
+    <id>http://yoursite.com/2014/11/23/SharedPreferences回顾/</id>
+    <published>2014-11-23T13:11:45.000Z</published>
+    <updated>2014-11-23T14:23:22.000Z</updated>
+    <content type="html"><![CDATA[<p>做软件开发应该都知道，很多软件会有配置文件，里面存放这程序运行当中的各个属性值，由于其配置信息并不多，如果采用数据库来存放并不划算，因为数据库连接跟操作等耗时大大影响了程序的效率，因此我们使用键值这种一一对应的关系来存放这些配置信息。SharedPreferences正是Android中用于实现这种存储方式的技术。<br><a id="more"></a><br>SharedPreferences的使用非常简单，能够轻松的存放数据和读取数据。SharedPreferences只能保存简单类型的数据，例如String、int等。一般会将复杂类型的数据转换成Base64编码，然后将转换后的数据以字符串的形式保存在 XML文件中，再用SharedPreferences保存。</p>
+<p>使用SharedPreferences保存key-value对的步骤如下：<br>　　（1）使用Activity类的getSharedPreferences方法获得SharedPreferences对象，其中存储key-value的文件的名称由getSharedPreferences方法的第一个参数指定。<br>　　（2）使用SharedPreferences接口的edit获得SharedPreferences.Editor对象。<br>　　（3）通过SharedPreferences.Editor接口的putXxx方法保存key-value对。其中Xxx表示不同的数据类型。例如：字符串类型的value需要用putString方法。<br>　　（4）通过SharedPreferences.Editor接口的commit方法保存key-value对。commit方法相当于数据库事务中的提交（commit）操作。</p>
+<p><strong>具体代码的书写流程为：</strong></p>
+<p>A、存放数据信息<br>1、打开Preferences，名称为setting，如果存在则打开它，否则创建新的Preferences</p>
+<pre><code><span class="attribute">SharedPreferences settings </span>=<span class="string"> getSharedPreferences(“setting”, 0);</span>
+</code></pre><p>2、让setting处于编辑状态</p>
+<pre><code><span class="attribute">SharedPreferences.Editor editor </span>=<span class="string"> settings.edit();</span>
+</code></pre><p>3、存放数据</p>
+<pre><code><span class="keyword">editor</span>.putString(“name”,”ATAAW”);
+<span class="keyword">editor</span>.putString(“URL”,”ATAAW.COM”);
+</code></pre><p>4、完成提交</p>
+<pre><code><span class="keyword">editor</span>.commit();
+</code></pre><p>B、读取数据信息<br>1、获取Preferences</p>
+<pre><code><span class="attribute">SharedPreferences settings </span>=<span class="string"> getSharedPreferences(“setting”, 0);</span>
+</code></pre><p>2、取出数据</p>
+<pre><code><span class="built_in">String</span> name = settings.getString(“name”,”默认值”);
+<span class="built_in">String</span> url = setting.getString(“URL”,”<span class="keyword">default</span>”);
+</code></pre><p>以上就是Android中SharedPreferences的使用方法，其中创建的Preferences文件存放位置可以在Eclipse中查看：<br>DDMS-&gt;File Explorer/data/data/&lt; package name&gt;/shared_prefs/下，上例中是此目录下的setting.xml文件。</p>
+<p>注意：</p>
+<p>SharedPreferences是一个接口，程序是无法创建SharedPreferences实例的，可以通过Context.getSharedPreferences(String name.int mode)来得到一个SharedPreferences实例：<br>　　name：是指文件名称，不需要加后缀.xml，系统会自动为我们添加上。一般这个文件存储在/data/data/<package name="">/ shared_prefs下(这个面试常问到)<br>　　mode：是指定读写方式，其值有三种，分别为：<br>　　  Context.MODE_PRIVATE：指定该SharedPreferences数据只能被本应用程序读、写<br>　　  Context.MODE_WORLD_READABLE：指定该SharedPreferences数据能被其他应用程序读，但不能写<br>　　  Context.MODE_WORLD_WRITEABLE：指定该SharedPreferences数据能被其他应用程序读写。</package></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>做软件开发应该都知道，很多软件会有配置文件，里面存放这程序运行当中的各个属性值，由于其配置信息并不多，如果采用数据库来存放并不划算，因为数据库连接跟操作等耗时大大影响了程序的效率，因此我们使用键值这种一一对应的关系来存放这些配置信息。SharedPreferences正是Android中用于实现这种存储方式的技术。<br>]]>
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[使用gitcafe同步github]]></title>
+    <link href="http://yoursite.com/2014/11/21/%E4%BD%BF%E7%94%A8gitcafe%E5%90%8C%E6%AD%A5github/"/>
+    <id>http://yoursite.com/2014/11/21/使用gitcafe同步github/</id>
+    <published>2014-11-21T11:50:53.000Z</published>
+    <updated>2014-11-21T19:41:30.000Z</updated>
+    <content type="html"><![CDATA[<p>github访问还是慢，今天在gitcafe上搭建了blog，测试下。。。</p>
+<p>记录下步骤：<br><a id="more"></a><br>1.在<a href="https://gitcafe.com/" target="_blank" rel="external">gitcafe</a>注册账号、创建同名项目等等，同github一样，<a href="http://jackhai9.github.io/2014/11/06/转投hexo-使用hexo在github写博客/" target="_blank" rel="external">见此</a>。</p>
+<p><del>2.<strong>在github和gitcafe上同时上传博客的时候，不能使用相同的秘钥。</strong></del></p>
+<p>cd到home目录( C:\Users\JackHai)下的.ssh目录，<br><code>ssh-keygen -t rsa -C &quot;jackhai789@gmail.com&quot;</code>  回车/回车/回车<br>以上命令执行后会在当前目录下生成id_rsa的秘钥和id_rsa.pub的公钥，把公钥内容copy到你的gitcafe账号的“SSH公钥管理”里，然后在命令行里使用命令 ssh -T git@gitcafe.com测试下，出现 “Hi jackhai9! You’ve successfully authenticated, but GitCafe does not provide shell access.”  提示，则ok了！</p>
+<p><del>这个时候回到HexoBlog目录，执行hexo g，然后upblog.bat，哈哈，同时部署到github和gitcafe，ok！good！</del></p>
+<p>注意：</p>
+<ul>
+<li><del>因为我的git不是单独安装的，我是使用的github软件里的git，在.ssh目录里有github_rsa和github_rsa.pub,我之前就是直接把github_rsa.pub这个公钥放到gitcafe里，所以会出现access denied的情况，连接不上。重新生成秘钥放到gitcafe里就ok了。</del></li>
+<li><del>因为gitcafe和github上传时要求所在的目录不一致(github是HexoBlog这个根目录，而gitcafe是.deploy目录)，所以理论上不能一键上传到两个上(需要cd切换目录)，因此我写了upblog.bat这个批处理文件，有了它，只要在HexoBlog根目录下运行<code>upblog.bat</code>这个命令就可以了。upblog.bat里面的内容是：<code>cd .deploy/ &amp;&amp; git checkout gitcafe-pages &amp;&amp; git push -u origin gitcafe-pages &amp;&amp; git checkout master &amp;&amp; cd .. &amp;&amp; hexo d</code></del></li>
+</ul>
+<h2 id="终极解决方法：">终极解决方法：</h2>
+<p><strong>思路是：先配置_config.yml文件的deploy，使得一个<code>hexo d</code>命令能把我们的项目部署到两个仓库里；再自动每次deploy完一个后，删除.deploy文件夹，再自动deploy另一个。</strong></p>
+<p>两次需要的.deploy文件夹是不一样的，可能是里面的配置有不一样的地方，所以我的解决方法是：在部署完一个后就删除掉.deploy文件夹，再重新部署，这就要求我们的_config.yml文件里对两个仓库都要进行配置，配置如下：</p>
+<pre><code>deploy:
+  type: git
+  repository: 
+    gitcafe: git@<span class="filename">gitcafe.com</span>:jackhai9/<span class="filename">jackhai9.git,gitcafe-pages
+    github</span>: git@<span class="filename">github.com</span>:jackhai9/<span class="filename">jackhai9.github.com.git,master</span>
+</code></pre><ul>
+<li>注意”:”后面的空格，还有，不要使用tab！！总之，就是在英文状态下编辑这个文件，不要使用tab，不然deploy的时候会报错！</li>
+</ul>
+<p>实现一个<code>hexo d</code>命令自动部署到两个平台，我的方法是：使用windows下的批处理bat文件，我依然使用upblog.bat这样一个名字(当然你可以随意命名)，文件内容超级简单：<code>hexo d &amp;&amp; rd .deploy &amp;&amp; hexo d</code></p>
+<p>Ok搞定！（rd 命令就是删除文件夹）</p>
+<p>既然如此，索性把<code>hexo g</code>命令也一起放入批处理中吧，实现真正的一键搞定。upblog.bat文件内容更加超级简单：<code>hexo d -g &amp;&amp; rd .deploy &amp;&amp; hexo d</code><br>这样，编辑完md文件后，直接在根目录<code>upblop.bat</code>即可！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>github访问还是慢，今天在gitcafe上搭建了blog，测试下。。。</p>
+<p>记录下步骤：<br>]]>
+    
+    </summary>
+    
+      <category term="gitcafe" scheme="http://yoursite.com/categories/gitcafe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android之ListView的性能提升]]></title>
+    <link href="http://yoursite.com/2014/11/21/Android%E4%B9%8BListView%E7%9A%84%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/"/>
+    <id>http://yoursite.com/2014/11/21/Android之ListView的性能提升/</id>
+    <published>2014-11-21T07:10:14.000Z</published>
+    <updated>2014-11-21T07:48:53.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="ListView如何运作的？">ListView如何运作的？</h2>
+<p>ListView是设计应用于对<strong>可扩展性和高性能要求</strong>的地方。实际上，这就意味着ListView有以下2个要求：</p>
+<ul>
+<li>1、尽可能少的创建View；</li>
+<li>2、只是绘制和布局在屏幕上可见的子View。</li>
+</ul>
+<p><a id="more"></a><br>理解第一点很简单：通过布局xml文件创建View并显示是很耗时耗资源的操作。尽管布局文件已经编译打包成了二进制形式以便于更高效的语法解析，但是创建View仍然需要通过一个特殊的XML树，并实例化所有需要响应的View。</p>
+<p>ListView通过回收一些不可见的Views，通常在Android源码中称为“ScrapView(废弃的View)”来解决这个问题。这意味着开发者只需要简单的更新每行的内容而不需要针对每个单独的行的布局来创建View。</p>
+<p>为了实现第二点，在我们滑动屏幕时，ListView通过使用View回收器来增加低于或者高于当前窗口的Views，并把当前活动的Views移动到一个可回收池中。这样的话，ListView只需要在内存中保持足够多的Views去填充分配空间中的布局和一些额外的可回收Views，即使当你的Adapter有上百个items的时候，它会使用不同的方法去填充行之间的空间，从顶部或者底部等等，具体取决于窗口是如何变化的。</p>
+<p>下面这个图很直观的展示了当你按下ListView的时候发生了什么：<br><img src="http://static.oschina.net/uploads/img/201410/20142945_Uhrp.png" alt="ListView"></p>
+<p>通过上述介绍，我们已经熟悉了ListView的这种机制，让我们继续前往技巧部分。正如上述介绍的，在滑动时，ListView通过动态的创建和回收很多View，实现了尽可能地让Adapter的getView()轻量。所有的技巧都是通过多种方法让getView()更快。</p>
+<h2 id="View的回收">View的回收</h2>
+<p>当ListView每次需要在屏幕上显示新的一行的时候，会从其Adapter中调用getView()方法。众所周知，getView()方法有3个参数：行的位置， convertView以及父ViewGroup。</p>
+<p>参数convertView说穿来就是之前讲述的ScrapView。当ListView更新一行布局时，convertView是一个非空值。因此，当convertView值非空时，你仅仅需要更新内容即可，而不需要重新inflate一个新行的布局。getView()在Adapter中一般是如下的形式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> View <span class="title">getView</span>(<span class="keyword">int</span> position, View convertView, ViewGroup parent) {</div><div class="line">	    <span class="keyword">if</span> (convertView == <span class="keyword">null</span>) {</div><div class="line">	        convertView = mInflater.inflate(R.layout.your_layout, <span class="keyword">null</span>);</div><div class="line">	    }</div><div class="line">	</div><div class="line">	    TextView text = (TextView) convertView.findViewById(R.id.text);</div><div class="line">	    text.setText(<span class="string">"Position "</span> + position);</div><div class="line">	</div><div class="line">	    <span class="keyword">return</span> convertView;</div><div class="line">	}</div></pre></td></tr></table></figure>
+
+<h2 id="View_Holder的使用">View Holder的使用</h2>
+<p>Android很常见的一个操作就是在布局文件中找到一个内部的View。通常是使用View的findViewById()方法来实现。这个findViewById()方法在View树中，根据一个View ID，会递归的被调用来找到其子树。虽然在静态UI布局中使用findViewById()是完全正常的。但是，在滑动时，ListView调用其Adapter中的getView()是非常频繁的。findViewById()可能会影响ListView滑动时的性能，尤其是你的行布局是很复杂的时候。</p>
+<p>View Holder的模式就是减少在Adapter中getView()方法中调用findViewById()的次数。实际上，View Holder是一个轻量级的内部类，用于直接引用所有内部views。在创建View之后，你可以在每行的View存储一个标签。通过这种方法，只需要在初次创建布局的时候调用findViewById()。下面是一个使用上述方法的View Holder模板的代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> View <span class="title">getView</span>(<span class="keyword">int</span> position, View convertView, ViewGroup parent) {</div><div class="line">    ViewHolder holder;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (convertView == <span class="keyword">null</span>) {</div><div class="line">        convertView = mInflater.inflate(R.layout.your_layout, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">        holder = <span class="keyword">new</span> ViewHolder();</div><div class="line">        holder.text = (TextView) convertView.findViewById(R.id.text);</div><div class="line"></div><div class="line">        convertView.setTag(holder);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        holder = convertView.getTag();</div><div class="line">    }</div><div class="line"></div><div class="line">    holder.text.setText(<span class="string">"Position "</span> + position);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> convertView;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> </span>{</div><div class="line">    <span class="keyword">public</span> TextView text;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="异步加载">异步加载</h2>
+<p>很多时候，Android应用在ListView每行中显示一些多媒体内容，比如图片等。在Adapter中的getView()使用应用内置的图片资源还是不会出什么问题的，因为可以存储在Android的高速缓存中。但当你想动态的显示来自本地磁盘或网络的内容时（例如缩略图，简历图片等）你可能不希望直接在Adapter中的getView()加载它们，因为<strong>IO进程会阻塞UI线程</strong>。如果这样做的话，ListView就看起来非常卡顿。</p>
+<p>在一个单独的线程，如果想要运行的所有行的IO操作实现异步的话，技巧就是要做到符合ListView的回收行为。例如，如果在Adapter中的getView()中，使用AsyncTask方式去加载资料图片，在AsyncTask完成之前，你正在加载的图片View就有可能被回收用于其他地方。所以，一旦异步操作完成的同时，需要一种机制来知道相应的View有没有被回收。</p>
+<p>一个简单的方法来实现这一目标是通过附加一些标识，来标示该行与它相关的View的信息。然后，当异步操作完成的时候，检查目标行的View和标识的View是否一致。实现这一目标的方法很多。下面是实现这种方法的一个很简单的示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> View <span class="title">getView</span>(<span class="keyword">int</span> position, View convertView,</div><div class="line">        ViewGroup parent) {</div><div class="line">    ViewHolder holder;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    holder.position = position;</div><div class="line"></div><div class="line">    <span class="keyword">new</span> ThumbnailTask(position, holder)</div><div class="line">            .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> convertView;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThumbnailTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span> </span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mPosition;</div><div class="line">    <span class="keyword">private</span> ViewHolder mHolder;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="title">ThumbnailTask</span>(<span class="keyword">int</span> position, ViewHolder holder) {</div><div class="line">        mPosition = position;</div><div class="line">        mHolder = holder;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">protected</span> Cursor <span class="title">doInBackground</span>(Void... arg0) {</div><div class="line">        <span class="comment">// Download bitmap here</span></div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span>(Bitmap bitmap) {</div><div class="line">        <span class="keyword">if</span> (mHolder.position == mPosition) {</div><div class="line">            mHolder.thumbnail.setImageBitmap(bitmap);</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> </span>{</div><div class="line">    <span class="keyword">public</span> ImageView thumbnail;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> position;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="人机交互知识">人机交互知识</h2>
+<p>做到在每一行异步加载很多资源，是一个高性能的ListView的必经之路。但是，在滑动屏幕时，如果你一味的在每一个getView()调用里面都去启动一个异步的操作，造成的结果就是你会浪费大量资源。因为行被频繁回收，造成大部分返回的结果会被丢弃。</p>
+<p><strong>考虑到实际的人机交互情况，在ListView适配器中，在每一行中都不应该去触发任何异步操作。也就是说，在ListView中有fling(快速滑动)操作时，启动任何异步操作都没有任何意义。一旦滚动停止或即将停止，才是开始真正显示每行的内容的时候。</strong></p>
+<p>Romain Guy写了一个很经典的应用：<a href="http://code.google.com/p/shelves/" target="_blank" rel="external">Shelves app</a>，其中有一个很好的的<a href="https://code.google.com/p/shelves/source/browse/trunk/Shelves/src/org/curiouscreature/android/shelves/activity/ShelvesActivity.java" target="_blank" rel="external">示例</a>。当GridView停止滑动时不做其他事情时，它就开始触发从而去异步加载书的封面资源。即使在滑动时，你也可以展示缓存中的内容，通过使用memory cache来平衡交互。这真是个好主意！</p>
+<h2 id="以上">以上</h2>
+<p>强烈推荐你看下Romain Guy和Adam Powell的关于ListView的<a href="https://www.youtube.com/watch?v=wDBM6wVEO70" target="_blank" rel="external">讨论</a>，里面涵盖了很多这篇文章的东西。你可以看看<a href="https://play.google.com/store/apps/details?id=org.lucasr.pattrn" target="_blank" rel="external">Pattrn</a>这个app，可以看到这里面的几个技巧是如何在应用中运用的。</p>
+<p>希望它是你在Android开发中一个很有用的参考:-)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="ListView如何运作的？">ListView如何运作的？</h2>
+<p>ListView是设计应用于对<strong>可扩展性和高性能要求</strong>的地方。实际上，这就意味着ListView有以下2个要求：</p>
+<ul>
+<li>1、尽可能少的创建View；</li>
+<li>2、只是绘制和布局在屏幕上可见的子View。</li>
+</ul>
+<p>]]>
+    
+    </summary>
+    
+      <category term="ListView" scheme="http://yoursite.com/tags/ListView/"/>
+    
+      <category term="Shelves app" scheme="http://yoursite.com/tags/Shelves-app/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[加装SSD+重装MSDN英文版win7系统]]></title>
+    <link href="http://yoursite.com/2014/11/20/%E5%8A%A0%E8%A3%85SSD-%E9%87%8D%E8%A3%85MSDN%E8%8B%B1%E6%96%87%E7%89%88win7%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://yoursite.com/2014/11/20/加装SSD-重装MSDN英文版win7系统/</id>
+    <published>2014-11-19T16:13:40.000Z</published>
+    <updated>2014-11-19T16:40:33.000Z</updated>
+    <content type="html"><![CDATA[<p>双11入手三星840evo 120G的固态硬盘，一直对SSD充满期待，这次确实没有让我失望。在<a href="msdn.itellyou.cn/">MSDN,我告诉你</a>下载了据说是纯净版的win7 x64。<br><a id="more"></a><br>先在BIOS里设置从USB启动，检查硬盘是否开启AHCI模式(默认已开启)，制作启动U盘，拆机替换机械硬盘，安上SSD，卸下光驱，把卸下的机械硬盘安在光驱位，ok搞定。</p>
+<p>插入USB开机，安装win7，格式化(此种方式默认4K对齐)，没有分区。之后安装驱动，装驱动时不要忘记安装AHCI驱动和IRST驱动，ok搞定。</p>
+<p>开机，飞一般的感觉！(win7默认多出来一个200M的分区，手动删名隐藏掉。)</p>
+<p>使用，飞一般的感觉！</p>
+<p>软件安装在C盘，尽量只安装常用的软件，其实还是不少。依然飞一般的感觉。</p>
+<p>安装软件确实费事，搞定后备份下系统做个Ghost，以后就省事了。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>双11入手三星840evo 120G的固态硬盘，一直对SSD充满期待，这次确实没有让我失望。在<a href="msdn.itellyou.cn/">MSDN,我告诉你</a>下载了据说是纯净版的win7 x64。<br>]]>
+    
+    </summary>
+    
+      <category term="SSD" scheme="http://yoursite.com/tags/SSD/"/>
+    
+      <category term="重装系统" scheme="http://yoursite.com/tags/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="随记" scheme="http://yoursite.com/categories/%E9%9A%8F%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android四大组件回顾总结(二)]]></title>
+    <link href="http://yoursite.com/2014/11/17/Android%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93-%E4%BA%8C/"/>
+    <id>http://yoursite.com/2014/11/17/Android四大组件回顾总结-二/</id>
+    <published>2014-11-17T08:45:38.000Z</published>
+    <updated>2014-11-17T08:48:27.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="二、四大组件的生命周期">二、四大组件的生命周期</h1>
+<p>介绍生命周期之前，先提一下任务的概念：</p>
+<p>任务其实就是activity的栈。它由一个或多个Activity组成，共同完成一个完整的用户体验，换句话说任务就是” 应用程序” <a id="more"></a>（可以是一个也可以是多个，比如假设你想让用户看到某个地方的街道地图。而已经存在一个具有此功能的activity了，那么你的activity所需要做的工作就是把请求信息放到一个Intent对象里面，并把它传递给startActivity()。于是地图浏览器就会显示那个地图。而当用户按下BACK键的时候，你的activity又会再一次的显示在屏幕上，此时任务是由2个应用程序中的相关activity组成的）。栈底的是启动整个任务的Activity，栈顶的是当前运行的用户可以交互的Activity，当一个activity启动另外一个的时候，新的activity就被压入栈，并成为当前运行的activity。而前一个activity仍保持在栈之中。当用户按下BACK键的时候，当前activity出栈，而前一个恢复为当前运行的activity。栈中保存的其实是对象，栈中的Activity永远不会重排，只会压入或弹出，所以如果发生了诸如需要多个地图浏览器的情况，就会使得一个任务中出现多个同一Activity子类的实例同时存在。</p>
+<p>任务中的所有activity是作为一个整体进行移动的。整个的任务（即activity栈）可以移到前台，或退至后台。举个例子说，比如当前任务在栈中存有四个activity──三个在当前activity之下。当用户按下HOME键的时候，回到了应用程序加载器，然后选择了一个新的应用程序（也就是一个新任务）。则当前任务遁入后台，而新任务的根activity显示出来。然后，过了一小会儿，用户再次回到了应用程序加载器而又选择了前一个应用程序（上一个任务）。于是那个任务，带着它栈中所有的四个activity，再一次的到了前台。当用户按下BACK键的时候，屏幕不会显示出用户刚才离开的activity（上一个任务的根activity），取而代之，当前任务的栈中最上面的activity被弹出，而同一任务中的上一个activity显示了出来。</p>
+<blockquote>
+<p>Activity栈：先进后出规则</p>
+</blockquote>
+<p>Android系统是一个多任务(Multi-Task)的操作系统，可以在用手机听音乐的同时，也执行其他多个程序。每多执行一个应用程序，就会多耗费一些系统内存，当同时执行的程序过多，或是关闭的程序没有正确释放掉内存，系统就会觉得越来越慢，甚至不稳定。</p>
+<p>为了解决这个问题，Android引入了一个新的机制 — 生命周期(Life Cycle)。</p>
+<p><code>Android应用程序的生命周期是由Android框架进行管理，而不是由应用程序直接控制。</code>通常，每一个应用程序（入口一般会是一个Activity 的onCreate 方法），都会产生一个进程(Process)。当系统内存即将不足的时候，会依照优先级自动进行进程(process)的回收。不管是使用者或开发者，都无法确定应用程序何时会被回收。所以为了很好的防止数据丢失和其他问题，了解生命周期很重要。</p>
+<h2 id="Activity生命周期">Activity生命周期</h2>
+<p><img src="http://jackhai.qiniudn.com/activitylifecycle.jpg" alt="生命周期"></p>
+<h4 id="Activity整个生命周期的4种状态、7个重要方法和3个嵌套循环">Activity整个生命周期的4种状态、7个重要方法和3个嵌套循环</h4>
+<p> <strong>4种状态</strong></p>
+<ul>
+<li>1) 活动(Active/Running)状态</li>
+</ul>
+<p>当Activity运行在屏幕前台(处于当前任务活动栈的最上面),此时它获取了焦点能响应用户的操作,属于运行状态，同一个时刻只会有一个Activity 处于活动(Active)或运行(Running)状态</p>
+<ul>
+<li>2) 暂停(Paused)状态</li>
+</ul>
+<p>当Activity失去焦点但仍对用户可见(如在它之上有另一个透明的Activity或Toast、AlertDialog等弹出窗口时)它处于暂停状态。暂停的Activity仍然是存活状态(它保留着所有的状态和成员信息并保持和窗口管理器的连接),但是当系统内存极小时可以被系统杀掉</p>
+<ul>
+<li>3) 停止(Stopped)状态</li>
+</ul>
+<p>完全被另一个Activity遮挡时处于停止状态,它仍然保留着所有的状态和成员信息。只是对用户不可见,当其他地方需要内存时它往往被系统杀掉</p>
+<ul>
+<li>4) 非活动(Dead)状态</li>
+</ul>
+<p>Activity 尚未被启动、已经被手动终止，或已经被系统回收时处于非活动的状态，要手动终止Activity，可以在程序中调用”finish”方法。</p>
+<p>如果是（按根据内存不足时的回收规则）被系统回收，可能是因为内存不足了。</p>
+<p>内存不足时，Dalvak虚拟机会根据其内存回收规则来回收内存：</p>
+<pre><code>  <span class="number">1.</span>先回收与其他Activity或Service/Intent Receiver无关的进程(即优先回收独立的Activity)因此建议,我们的一些(耗时)后台操作，最好是做成Service的形式
+
+  <span class="number">2.</span>不可见(处于Stopped状态的)Activity
+
+  <span class="number">3.</span>Service进程(除非真的没有内存可用时会被销毁)
+
+  <span class="number">4.</span>非活动的可见的(Paused状态的)Activity
+
+  <span class="number">5.</span>当前正在运行(<span class="keyword">Active</span>/Running状态的)Activity
+</code></pre><p> <strong>7个重要方法</strong></p>
+<p>当Activity从一种状态进入另一状态时系统会自动调用下面相应的方法来通知用户这种变化:</p>
+<p>当Activity第一次被实例化的时候系统会调用,整个生命周期只调用1次如下方法。通常用于初始化设置: 1、为Activity设置所要使用的布局文件；2、为按钮绑定监听器等静态的设置操作。</p>
+<pre><code>  <span class="function">onCreate</span>(Bundle savedInstanceState);
+</code></pre><p>当Activity可见未获得用户焦点不能交互时系统会调用：</p>
+<pre><code>  <span class="function">onStart</span>();
+</code></pre><p>当Activity已经停止然后重新被启动时系统会调用：</p>
+<pre><code>  <span class="function">onRestart</span>();
+</code></pre><p>当Activity可见且获得用户焦点能交互时系统会调用：</p>
+<pre><code>  <span class="function">onResume</span>();
+</code></pre><p>当系统启动另外一个新的Activity时,在新Activity启动之前被系统调用保存现有的Activity中的持久数据、停止动画等,这个实现方法必须非常快。当系统而不是用户自己出于回收内存时，关闭了activity之后。用户会期望当他再次回到这个activity的时候，它仍保持着上次离开时的样子。此时用到了onSaveInstanceState()方法，onSaveInstanceState()用来保存Activity被杀之前的状态,在onPause()之前被触发,当系统为了节省内存销毁了Activity(用户本不想销毁)时就需要重写这个方法了,当此Activity再次被实例化时会通过onCreate(Bundle savedInstanceState)将已经保存的临时状态数据传入。因为onSaveInstanceState()方法<strong>不总是</strong>被调用,触发条件为(按下HOME键,按下电源按键关闭屏幕,横竖屏切换情况下),你应该仅重写onSaveInstanceState()来记录activity的临时状态，而不是持久的数据。记录持久数据的话应该使用onPause()。</p>
+<pre><code>  <span class="function">onPause</span>();
+</code></pre><p>当Activity被新的Activity完全覆盖不可见时被系统调用：</p>
+<pre><code>  <span class="function">onStop</span>();
+</code></pre><p>当Activity(用户调用finish()或系统由于内存不足)被系统销毁杀掉时系统调用：（整个生命周期只调用1次，用来释放onCreate()方法中创建的资源,如结束线程等）</p>
+<pre><code>  <span class="function">onDestroy</span>();
+</code></pre><p> <strong>3个嵌套循环</strong></p>
+<pre><code> 1<span class="class">.Activity</span>完整的生命周期<span class="value">:从第一次调用<span class="function">onCreate</span>()开始直到调用<span class="function">onDestroy</span>()结束
+ <span class="number">2</span>.Activity的可视生命周期:从调用<span class="function">onStart</span>()到相应的调用<span class="function">onStop</span>()
+   在这两个方法之间,可以保持显示Activity所需要的资源。如在<span class="function">onStart</span>()中注册一个广播接收者监听影响你的UI的改变,在<span class="function">onStop</span>()中注销。
+ <span class="number">3</span>.Activity的前台生命周期:从调用<span class="function">onResume</span>()到相应的调用<span class="function">onPause</span>()。</span>
+</code></pre><p>举例说明:</p>
+<p>例1：有3个Acitivity,分别用One,Two(透明的),Three表示,One是应用启动时的主Activity</p>
+<pre><code>  启动第一个界面Activity One时,它的次序是
+         onCreate (ONE) - onStart (ONE) - <span class="function">onResume</span>(ONE)
+
+  点"打开透明Activity"按钮时,这时走的次序是
+         <span class="function">onPause</span>(ONE) - <span class="function">onCreate</span>(TWO) - <span class="function">onStart</span>(TWO) - <span class="function">onResume</span>(TWO)
+
+  再点back回到第一个界面,Two会被杀这时走的次序是
+         <span class="function">onPause</span>(TWO) - <span class="function">onActivityResult</span>(ONE) - <span class="function">onResume</span>(ONE) - <span class="function">onStop</span>(TWO) - <span class="function">onDestroy</span>(TWO)
+
+  点"打开全屏Activity"按钮时,这时走的次序是
+         <span class="function">onPause</span>(ONE) - <span class="function">onCreate</span>(Three) - <span class="function">onStart</span>(Three) - <span class="function">onResume</span>(Three) - <span class="function">onStop</span>(ONE)
+
+  再点back回到第一个界面,Three会被杀这时走的次序是
+         <span class="function">onPause</span>(Three) - <span class="function">onActivityResult</span>(ONE) - <span class="function">onRestart</span>(ONE) - <span class="function">onStart</span>(ONE)- <span class="function">onResume</span>(ONE) - <span class="function">onStop</span>(Three) - <span class="function">onDestroy</span>(Three)
+
+  再点back退出应用时,它的次序是
+         <span class="function">onPause</span>(ONE) - <span class="function">onStop</span>(ONE) - <span class="function">onDestroy</span>(ONE)           
+</code></pre><p>例2：横竖屏切换时Activity的生命周期</p>
+<pre><code>  <span class="number">1</span>、新建一个Activity，并把各个生命周期打印出来
+
+  <span class="number">2</span>、运行Activity，得到如下信息
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+
+  <span class="number">3</span>、按crtl+f12切换成横屏时
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+
+  <span class="number">4</span>、再按crtl+f12切换成竖屏时，发现打印了两次相同的<span class="built_in">log</span>
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+
+  <span class="number">5</span>、修改AndroidManifest.xml，把该Activity添加android:configChanges=<span class="string">"orientation"</span>，执行步骤<span class="number">3</span>
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+
+  <span class="number">6</span>、再执行步骤<span class="number">4</span>，发现不会再打印相同信息，但多打印了一行onConfigChanged
+  onSaveInstanceState<span class="comment">--&gt;</span>
+  onPause<span class="comment">--&gt;</span>
+  onStop<span class="comment">--&gt;</span>
+  onDestroy<span class="comment">--&gt;</span>
+  onCreate<span class="comment">--&gt;</span>
+  onStart<span class="comment">--&gt;</span>
+  onRestoreInstanceState<span class="comment">--&gt;</span>
+  onResume<span class="comment">--&gt;</span>
+  onConfigurationChanged<span class="comment">--&gt;</span>
+
+  <span class="number">7</span>、把步骤<span class="number">5</span>的android:configChanges=<span class="string">"orientation"</span> 改成 android:configChanges=<span class="string">"orientation|keyboardHidden"</span>，执行步骤<span class="number">3</span>
+  onConfigurationChanged<span class="comment">--&gt;</span>
+
+  <span class="number">8</span>、执行步骤<span class="number">4</span>
+  onConfigurationChanged<span class="comment">--&gt;</span>
+  onConfigurationChanged<span class="comment">--&gt;</span>
+</code></pre><p> 总结：</p>
+<p>1、不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次</p>
+<p>2、设置Activity的android:configChanges=”orientation”时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次</p>
+<p>3、设置Activity的android:configChanges=”orientation|keyboardHidden”时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法</p>
+<p><strong>总结一下整个Activity的生命周期</strong></p>
+<p>补充一点，当前Activity产生事件弹出Toast和AlertDialog的时候Activity的生命周期不会有改变。</p>
+<p>Activity运行时按下HOME键(跟被完全覆盖是一样的)：onSaveInstanceState —&gt; onPause —&gt; onStop，再次进入激活状态时： onRestart —&gt;onStart—-&gt;onResume</p>
+<h2 id="BroadcastReceive生命周期">BroadcastReceive生命周期</h2>
+<p>BroadcastReceive生命周期只有十秒左右，如果在 onReceive() 内做超过十秒内的事情，就会报ANR(Application No Response) 程序无响应的错误信息</p>
+<p>它的生命周期为从回调onReceive()方法开始到该方法返回结果后结束</p>
+<h2 id="Service服务生命周期">Service服务生命周期</h2>
+<p><img src="http://jackhai.qiniudn.com/service生命周期.jpg" alt="service生命周期"></p>
+<p>Service完整的生命周期:从调用onCreate()开始直到调用onDestroy()结束</p>
+<p>Service有两种使用方法：</p>
+<pre><code>  <span class="number">1</span>&gt;以调用<span class="keyword">Context</span>.startService()启动，而以调用<span class="keyword">Context</span>.stopService()结束
+  <span class="number">2</span>&gt;以调用<span class="keyword">Context</span>.bindService()方法建立，以调用<span class="keyword">Context</span>.unbindService()关闭
+</code></pre><p>service重要的生命周期方法</p>
+<p>当用户调用startService()或bindService()时，Service第一次被实例化的时候系统会调用,整个生命周期只调用1次这个方法，通常用于初始化设置：（注意：多次调用startService()或bindService()方法不会多次触发onCreate()方法）</p>
+<pre><code>  <span class="title">void</span> <span class="built_in">on</span>Create()
+</code></pre><p>当用户调用stopService()或unbindService()来停止服务时被系统调用,（整个生命周期只调用1次）用来释放onCreate()方法中创建的资源:</p>
+<pre><code>  <span class="title">void</span> <span class="built_in">on</span>Destroy()
+</code></pre><p>通过startService()方法启动的服务:（初始化结束后系统会调用该方法，用于处理传递给startService()的Intent对象。如音乐服务会打开Intent 来探明将要播放哪首音乐，并开始播放。注意：多次调用startService()方法会多次触发onStart()方法）</p>
+<pre><code>  <span class="title">void</span> <span class="built_in">on</span>Start(Intent intent)
+</code></pre><p>通过bindService()方法启动的服务:（初始化结束后系统会调用该方法，用来绑定传递给bindService 的Intent 的对象。注意：多次调用bindService（）时，如果该服务已启动则不会再触发此方法）</p>
+<pre><code>  <span class="title">IBinder</span> <span class="built_in">on</span>Bind(Intent intent)
+</code></pre><p>用户调用unbindService()时系统调用此方法:（Intent对象同样传递给该方法）</p>
+<pre><code>  <span class="title">boolean</span> <span class="built_in">on</span>Unbind(Intent intent)
+</code></pre><p>如果有新的客户端连接至该服务，只有当旧的调用onUnbind()后，新的才会调用该方法：</p>
+<pre><code>  <span class="title">void</span> <span class="built_in">on</span>Rebind(Intent intent)
+</code></pre><p>补充：onCreate(Bundle savedInstanceState)与onSaveInstanceState(Bundle savedInstanceState)配合使用，见如下代码，达到显示activity被系统杀死前的状态：</p>
+<pre><code>  <span class="annotation">@Override</span>
+  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span>(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    <span class="keyword">if</span> (<span class="keyword">null</span> != savedInstanceState) {
+        String _userid = savedInstanceState.getString(<span class="string">"StrUserId"</span>);
+        String _uid = savedInstanceState.getString(<span class="string">"StrUid"</span>);
+        String _serverid = savedInstanceState.getString(<span class="string">"StrServerId"</span>);
+        String _servername = savedInstanceState.getString(<span class="string">"StrServerName"</span>);
+        <span class="keyword">int</span> _rate = savedInstanceState.getInt(<span class="string">"StrRate"</span>);
+        <span class="comment">//updateUserId(_userid);</span>
+        <span class="comment">//updateUId(_uid);</span>
+        <span class="comment">//updateServerId(_serverid);</span>
+        <span class="comment">//updateUserServer(_servername);</span>
+        <span class="comment">//updateRate(_rate);</span>
+    }
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span>(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onSaveInstanceState(savedInstanceState);
+    savedInstanceState.putString(<span class="string">"StrUserId"</span>, getUserId());
+    savedInstanceState.putString(<span class="string">"StrUid"</span>, getUId());
+    savedInstanceState.putString(<span class="string">"StrServerId"</span>, getServerId());
+    savedInstanceState.putString(<span class="string">"StrServerName"</span>, getServerName());
+    savedInstanceState.putInt(<span class="string">"StrRate"</span>, getRate());
+  }
+</code></pre><p>注：</p>
+<p>ContentProvider的介绍见<a href="http://jackhai9.github.io/2014/11/17/Android%E4%B9%8BContentProvider/" title="这里" target="_blank" rel="external">这里</a></p>
+<p><strong>引发activity摧毁和重建的其他情形</strong><br>除了系统处于内存不足的原因会摧毁activity之外, 某些系统设置的改变也会导致activity的摧毁和重建. 例如改变屏幕方向(见上例), 改变设备语言设定, 键盘弹出等.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="二、四大组件的生命周期">二、四大组件的生命周期</h1>
+<p>介绍生命周期之前，先提一下任务的概念：</p>
+<p>任务其实就是activity的栈。它由一个或多个Activity组成，共同完成一个完整的用户体验，换句话说任务就是” 应用程序” ]]>
+    
+    </summary>
+    
+      <category term="LifeCycle" scheme="http://yoursite.com/tags/LifeCycle/"/>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android之ContentProvider]]></title>
+    <link href="http://yoursite.com/2014/11/17/Android%E4%B9%8BContentProvider/"/>
+    <id>http://yoursite.com/2014/11/17/Android之ContentProvider/</id>
+    <published>2014-11-17T08:39:27.000Z</published>
+    <updated>2014-11-17T12:15:42.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="一、ContentProvider简介">一、ContentProvider简介</h2>
+<p>Android官方指出的数据存储方式总共有五种，分别是：Shared Preferences、网络存储、文件存储、外储存储、SQLite。当应用继承ContentProvider类，并重写该类用于提供数据和存储数据的方法，就可以向其他应用共享其数据。虽然使用其他方法也可以对外共享数据，但数据访问方式会因数据存储的方式而不同，如：采用文件方式对外共享数据，需要进行文件操作读写数据；采用sharedpreferences共享数据，需要使用sharedpreferences API读写数据。而使用ContentProvider共享数据的好处是统一了数据访问方式。<br><a id="more"></a> </p>
+<p>回顾一下Android中数据存储的方式有很多种：<br>(1) SharePreferences通过api进行get、put操作   ——进程内部使用，可以实现资源共享，局限性比较大<br>可以参考：<a href="http://blog.csdn.net/shift_wwx/article/details/9243109" target="_blank" rel="external">SharedPreference实现不同进程间的数据共享</a><br>(2) 通过file进行一些输入输出流控制   ——能实现进程间的共享，但是使用比较麻烦，个人不太喜欢用<br>(3) 通过SQLite进行数据库的读写   ——进程内部使用，可以实现资源共享，局限性比较大<br>(4) ContentProvider 进行数据的存储   ——可以实现进程间的共享，可以和SQLite配合使用(当然也可以用其他几个存储方式，稍后补充上实例)，一般实现的是大型数据操作<br>(5) 网络存储数据  ——比较麻烦，有局限性<br>(6) system.prop 也可以进行简单的数据存储    ——有局限性，有default值，可以临时修改，重启后就会恢复默认值或重新设置</p>
+<p><strong>使用ContentProvider共享数据的好处是统一了数据访问方式，可以存储一些图片等的数据。而其他的访问方式是有局限性的。</strong><br><a href="http://blog.csdn.net/shift_wwx/article/details/24350781" target="_blank" rel="external">参考这里</a></p>
+<h2 id="二、Uri类简介">二、Uri类简介</h2>
+<p>Uri代表了要操作的数据，Uri主要包含了两部分信息：</p>
+<p>1.需要操作的ContentProvider<br>2.对ContentProvider中的什么数据进行操作</p>
+<p>一个Uri由以下几部分组成：</p>
+<pre><code> <span class="number">1.</span>scheme：ContentProvider（内容提供者）的scheme已经由Android所规定为：content:<span class="comment">//。</span>
+ <span class="number">2.</span>主机名（或Authority）：用于唯一标识这个ContentProvider，外部调用者可以根据这个标识来找到它。
+ <span class="number">3.</span>路径（path）：可以用来表示我们要操作的数据，路径的构建应根据业务而定，如下：
+   • 要操作contact表中<span class="keyword">id</span>为<span class="number">10</span>的记录，可以构建这样的路径:/contact/<span class="number">10</span>
+   • 要操作contact表中<span class="keyword">id</span>为<span class="number">10</span>的记录的name字段， contact/<span class="number">10</span>/name
+   • 要操作contact表中的所有记录，可以构建这样的路径:/contact
+   要操作的数据不一定来自数据库，也可以是文件等其他存储方式，如下:
+     要操作xml文件中contact节点下的name节点，可以构建这样的路径：/contact/name
+</code></pre><p>如果要把一个字符串转换成Uri，可以使用Uri类中的parse()方法，如下：</p>
+<pre><code><span class="constant">Uri uri</span> = Uri.parse(<span class="string">"content://com.changcheng.provider.contactprovider/contact"</span>)
+</code></pre><h2 id="三、UriMatcher、ContentUrist和ContentResolver简介">三、UriMatcher、ContentUrist和ContentResolver简介</h2>
+<p>因为Uri代表了要操作的数据，所以我们经常需要解析Uri，并从Uri中获取数据。Android系统提供了两个用于操作Uri的工具类，分别为UriMatcher和ContentUris。掌握它们的使用，会便于我们的开发工作。<br>UriMatcher：用于匹配Uri，它的用法如下：</p>
+<pre><code>   <span class="number">1</span>.首先把你需要匹配Uri路径全部给注册上，如下：
+   //常量UriMatcher.NO_MATCH表示不匹配任何路径的返回码(-<span class="number">1</span>)。
+   UriMatcher  uriMatcher = <span class="keyword">new</span> UriMatcher(UriMatcher.NO_MATCH);
+
+   //如果<span class="built_in">match</span>()方法匹配conten<span class="variable">t:</span>//<span class="keyword">com</span>.changcheng.sqlite.provider.contactprovider/contact路径，返回匹配码为<span class="number">1</span>
+   uriMatcher.addURI(“<span class="keyword">com</span>.changcheng.sqlite.provider.contactprovider”, “contact”, <span class="number">1</span>);//添加需要匹配uri，如果匹配就会返回匹配码
+
+   //如果<span class="built_in">match</span>()方法匹配conten<span class="variable">t:</span>//<span class="keyword">com</span>.changcheng.sqlite.provider.contactprovider/contact/<span class="number">230</span>路径，返回匹配码为<span class="number">2</span>
+   uriMatcher.addURI(“<span class="keyword">com</span>.changcheng.sqlite.provider.contactprovider”, “contact/#”, <span class="number">2</span>);//#号为通配符
+
+   <span class="number">2</span>.注册完需要匹配的Uri后，就可以使用uriMatcher.<span class="built_in">match</span>(uri)方法对输入的Uri进行匹配，如果匹配就返回匹配码，匹配码是调用addURI()方法传入的第三个参数，
+   假设匹配conten<span class="variable">t:</span>//<span class="keyword">com</span>.changcheng.sqlite.provider.contactprovider/contact路径，返回的匹配码为<span class="number">1</span>。
+</code></pre><p>ContentUris：用于获取Uri路径后面的ID部分，它有两个比较实用的方法：</p>
+<ul>
+<li>withAppendedId(uri, id)用于为路径加上ID部分</li>
+<li>parseId(uri)方法用于从路径中获取ID部分</li>
+</ul>
+<p>ContentResolver：当外部应用需要对ContentProvider中的数据进行添加、删除、修改和查询操作时，可以使用ContentResolver类来完成，要获取ContentResolver对象，可以使用Activity提供的getContentResolver()方法。 ContentResolver使用insert、delete、update、query方法来操作数据。</p>
+<h2 id="四、详细图解">四、详细图解</h2>
+<p> ~ ~这下你能看懂了吧！~ ~</p>
+<p>1、<img src="http://jackhai.qiniudn.com/1.png" alt=""></p>
+<p>2、<img src="http://jackhai.qiniudn.com/2.png" alt=""></p>
+<p>3、<img src="http://jackhai.qiniudn.com/3.png" alt=""></p>
+<p>4、<img src="http://jackhai.qiniudn.com/4_总结.png" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="一、ContentProvider简介">一、ContentProvider简介</h2>
+<p>Android官方指出的数据存储方式总共有五种，分别是：Shared Preferences、网络存储、文件存储、外储存储、SQLite。当应用继承ContentProvider类，并重写该类用于提供数据和存储数据的方法，就可以向其他应用共享其数据。虽然使用其他方法也可以对外共享数据，但数据访问方式会因数据存储的方式而不同，如：采用文件方式对外共享数据，需要进行文件操作读写数据；采用sharedpreferences共享数据，需要使用sharedpreferences API读写数据。而使用ContentProvider共享数据的好处是统一了数据访问方式。<br>]]>
+    
+    </summary>
+    
+      <category term="Uri" scheme="http://yoursite.com/tags/Uri/"/>
+    
+      <category term="ContentProvider" scheme="http://yoursite.com/tags/ContentProvider/"/>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android四大组件回顾总结(一)]]></title>
+    <link href="http://yoursite.com/2014/11/14/Android%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2014/11/14/Android四大组件回顾总结/</id>
+    <published>2014-11-14T11:54:23.000Z</published>
+    <updated>2014-11-15T17:00:31.000Z</updated>
+    <content type="html"><![CDATA[<p>四大组件分别是Activity、Service、Content Provider、BroadcastReceiver。</p>
+<h1 id="一、四大组件的介绍">一、四大组件的介绍</h1>
+<h2 id="1、Activity">1、Activity</h2>
+<p>应用程序中，一个Activity通常就是一个单独的屏幕，它上面可以显示一些控件也可以监听并处理用户的事件，做出响应。<br><a id="more"></a></p>
+<ul>
+<li>Activity之间通过Intent进行通信。在Intent的描述结构中，有两个最重要的部分：动作和动作对应的数据。</li>
+<li>典型的动作类型有：MAIN（activity的门户）、VIEW、PICK、EDIT等。而动作对应的数据则以URI的形式进行表示。例如：要查看一个人的联系方式，你需要创建一个动作类型为VIEW的intent，以及一个表示这个人的URI。</li>
+<li>与之有关系的一个类叫IntentFilter。相对于intent是一个有效的做某事的请求，一个intentfilter则用于描述一个activity（或者IntentReceiver）能够操作哪些intent。一个activity如果要显示一个人的联系方式时，需要声明一个IntentFilter，这个IntentFilter要知道怎么去处理VIEW动作和表示一个人的URI。IntentFilter需要在AndroidManifest.xml中定义。通过解析各种intent，从一个屏幕导航到另一个屏幕是很简单的。当向前导航时，activity将会调用startActivity(Intent myIntent)方法。然后，系统会在所有安装的应用程序中定义的IntentFilter中查找，找到最匹配myIntent的Intent对应的activity。新的activity接收到myIntent的通知后，开始运行。当startActivity方法被调用将触发解析myIntent的动作，这个机制提供了两个关键好处：<ul>
+<li>1、Activities能够重复利用从其它组件中以Intent的形式产生的一个请求；</li>
+<li>2、Activities可以在任何时候被一个具有相同IntentFilter的新的Activity取代。</li>
+</ul>
+</li>
+</ul>
+<p>AndroidManifest文件中含有如下过滤器的Activity组件为默认启动类，当程序启动时<strong>系统</strong>自动调用它：</p>
+<pre><code><span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span>
+   <span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.MAIN"</span> /&gt;</span>
+   <span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.category.LAUNCHER"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span>
+</code></pre><h2 id="2、BroadcastReceiver广播接收器">2、BroadcastReceiver广播接收器</h2>
+<p>你的应用可以使用它对外部事件进行过滤，只对感兴趣的外部事件(如当电话呼入时，或者数据网络可用时)进行接收并做出响应。广播接收器没有用户界面。然而，它们可以启动一个activity或serice来响应它们收到的信息，或者用NotificationManager来通知用户。通知可以用很多种方式来吸引用户的注意力──闪动背灯、震动、播放声音等。一般来说是在状态栏上放一个持久的图标，用户可以打开它并获取消息。</p>
+<p>广播类型：</p>
+<ul>
+<li>普通广播，通过Context.sendBroadcast(Intent myIntent)发送的</li>
+<li>有序广播，通过Context.sendOrderedBroadcast(intent, receiverPermission)发送的，该方法第2个参数决定该广播的级别，级别数值是在 -1000 到 1000 之间 , 值越大 , 发送的优先级越高；广播接收者接收广播时的级别（可通过intentfilter中的priority进行设置，设为2147483647时优先级最高），同级别接收的先后是随机的， 再到级别低的收到广播，高级别的或同级别先接收到广播的可以通过abortBroadcast()方法截断广播使其他的接收者无法收到该广播，还有其他构造函数</li>
+<li>异步广播，通过Context.sendStickyBroadcast(Intent myIntent)发送的，还有sendStickyOrderedBroadcast(intent, resultReceiver, scheduler,  initialCode, initialData, initialExtras)方法，该方法具有有序广播的特性也有异步广播的特性；发送异步广播要 <uses-permission android:name="android.permission.BROADCAST_STICKY"> 权限，接收并处理完Intent后，广播依然存在，直到你调用removeStickyBroadcast(intent)主动把它去掉</uses-permission></li>
+</ul>
+<p>注意：发送广播时的intent参数与Context.startActivity()启动起来的Intent不同,前者可以被多个订阅它的广播接收器调用,后者只能被一个(activity或service)调用。</p>
+<p>监听广播Intent步骤:</p>
+<ul>
+<li>1、写一个继承BroadCastReceiver的类,重写onReceive()方法,广播接收器仅在它执行这个方法时处于活跃状态。当onReceive()返回后，它即为失活状态，注意:为了保证用户交互过程的流畅，一些费时的操作要放到线程里，如类名SMSBroadcastReceiver。</li>
+<li><p>2、注册该广播接收者,注册有两种方法：程序动态注册和AndroidManifest文件中进行静态注册（可理解为系统中注册）如下：</p>
+<ul>
+<li><p>静态注册,注册的广播，下面的priority表示接收广播的级别”2147483647”为最高优先级</p>
+<pre><code><span class="tag">&lt;<span class="title">receiver</span> <span class="attribute">android:name</span>=<span class="value">".SMSBroadcastReceiver"</span> &gt;</span>
+   <span class="tag">&lt;<span class="title">intent-filter</span> <span class="attribute">android:priority</span> = "<span class="attribute">2147483647</span>" &gt;</span>
+<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.provider.Telephony.SMS_RECEIVED"</span> /&gt;</span>
+   <span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">receiver</span> &gt;</span>
+</code></pre></li>
+<li><p>动态注册，一般在Activity可交互时onResume()内注册BroadcastReceiver</p>
+<pre><code>IntentFilter intentFilter=<span class="keyword">new</span> IntentFilter(<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>);
+registerReceiver(mBatteryInfoReceiver ,intentFilter);
+
+<span class="comment">//反注册</span>
+unregisterReceiver(receiver);
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li><p>1.生命周期只有十秒左右，如果在 onReceive() 内做超过十秒内的事情，就会报ANR(Application No Response) 程序无响应的错误信息，如果需要完成一项比较耗时的工作 , 应该通过发送 Intent 给 Service, 由Service 来完成 . 这里不能使用子线程来解决 , 因为 BroadcastReceiver 的生命周期很短 , 子线程可能还没有结束BroadcastReceiver 就先结束了 .BroadcastReceiver 一旦结束 , 此时 BroadcastReceiver 的所在进程很容易在系统需要内存时被优先杀死 , 因为它属于空进程 ( 没有任何活动组件的进程 ). 如果它的宿主进程被杀死 , 那么正在工作的子线程也会被杀死 . 所以采用子线程来解决是不可靠的.</p>
+</li>
+<li><p>2.动态注册广播接收器还有一个特点，就是当用来注册的Activity关掉后，广播也就失效了。静态注册无需担忧广播接收器是否被关闭,只要设备是开启状态,广播接收器也是打开着的。也就是说哪怕app本身未启动,该app订阅的广播在触发时也会对它起作用.</p>
+</li>
+</ul>
+<p>系统常见广播Intent,如开机启动、电池电量变化、时间改变等广播.</p>
+<h2 id="3、Service服务">3、Service服务</h2>
+<p>一个Service是一段长生命周期的，没有用户界面的程序，可以用来开发如监控类程序。</p>
+<p>比较好的一个例子就是一个正在从播放列表中播放歌曲的媒体播放器。在一个媒体播放器的应用中，应该会有多个activity，让使用者可以选择歌曲并播放歌曲。然而，音乐重放这个功能并没有对应的activity，因为使用者当然会认为在导航到其它屏幕时音乐应该还在播放的。在这个例子中，媒体播放器这个activity会使用Context.startService()来启动一个service，从而可以在后台保持音乐的播放。同时，系统也将保持这个service一直执行，直到这个service运行结束。另外，我们还可以通过使用Context.bindService()方法，连接到一个service上（如果这个service还没有运行将启动它）。当连接到一个service之后，我们还可以使用service提供的接口与它进行通讯。拿媒体播放器这个例子来说，我们还可以进行暂停、重播等操作。</p>
+<p>Service使用步骤如下：</p>
+<pre><code>   1、继承service类
+   2、AndroidManifast.xml配置清单文件中<span class="tag">&lt;<span class="title">application</span>&gt;</span>节点里对服务进行配置
+         <span class="tag">&lt;<span class="title">service</span> <span class="attribute">name</span>=<span class="value">".SMSService"</span>/&gt;</span>
+</code></pre><p>服务不能自己运行,需要通过Contex.startService()或Contex.bindService()启动服务。</p>
+<p>通过startService()方法启动的服务与调用者没有关系,即使调用者关闭了,服务仍然运行。想停止服务要调用Context.stopService(),此时系统会调用onDestory(),使用此方法启动时,服务首次启动系统，先调用服务的onCreate()—&gt;onStart(),如果服务已经启动再次调用只会触发onStart()方法。</p>
+<p>使用bindService()启动的服务与调用者绑定,只要调用者关闭,服务就终止,使用此方法启动时,服务首次启动,系统先调用服务的onCreate()—&gt;onBind(),如果服务已经启动再次调用不会再触发这2个方法,调用者退出时系统会调用服务的onUnbind()—&gt;onDestory(),想主动解除绑定可使用Contex.unbindService(),系统依次调用onUnbind()—&gt;onDestory();</p>
+<h2 id="4、Content_Provider内容提供者">4、Content Provider内容提供者</h2>
+<p>android平台提供了Content Provider使一个应用程序的指定数据集提供给其他应用程序。这些数据可以存储在文件系统中、在一个SQLite数据库、或以任何其他合理的方式,其他应用可以通过ContentResolver类(见ContentProviderAccessApp例子)从该内容提供者中获取或存入数据.(相当于在应用外包了一层壳)。只有需要在多个应用程序间共享数据时才需要内容提供者。例如，通讯录数据被多个应用程序使用，且必须存储在一个内容提供者中。它的好处:统一数据访问方式。</p>
+<ul>
+<li><p>android系统自带的内容提供者(顶级的表示数据库名,非顶级的都是表名)，这些内容提供者在SDK文档的reference下的android.provider的包中都有介绍。见<a href="http://developer.android.com/reference/android/provider/package-summary.html" target="_blank" rel="external">这里</a></p>
+<ul>
+<li>CallLog：地址和接收到的电话信息</li>
+<li>Contact.People.Phones：存储电话号码</li>
+<li>Setting.System：系统设置和偏好设置</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用Content Provider对外共享数据的步骤</strong></p>
+<p>1、继承ContentProvider类并根据需求重写以下方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreate</span>();<span class="comment">//处理初始化操作</span></div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 插入数据到内容提供者(允许其他应用向你的应用中插入数据时重写)</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> *<span class="javadoctag"> @param</span> initialValues 插入的数据</div><div class="line"> *<span class="javadoctag"> @return</span></div><div class="line"> */</div><div class="line"><span class="keyword">public</span> Uri <span class="title">insert</span>(Uri uri, ContentValues initialValues);</div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 从内容提供者中删除数据(允许其他应用删除你应用的数据时重写)</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> *<span class="javadoctag"> @param</span> selection 条件语句</div><div class="line"> *<span class="javadoctag"> @param</span> selectionArgs 参数</div><div class="line"> *<span class="javadoctag"> @return</span></div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span>(Uri uri, String selection, String[] selectionArgs);</div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 更新内容提供者已存在的数据(允许其他应用更新你应用的数据时重写)</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> *<span class="javadoctag"> @param</span> values 更新的数据</div><div class="line"> *<span class="javadoctag"> @param</span> selection 条件语句</div><div class="line"> *<span class="javadoctag"> @param</span> selectionArgs 参数</div><div class="line"> *<span class="javadoctag"> @return</span></div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span>(Uri uri, ContentValues values, String selection,</div><div class="line">              String[] selectionArgs);</div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 返回数据给调用者(允许其他应用从你的应用中获取数据时重写)</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> *<span class="javadoctag"> @param</span> projection 列名</div><div class="line"> *<span class="javadoctag"> @param</span> selection 条件语句</div><div class="line"> *<span class="javadoctag"> @param</span> selectionArgs 参数</div><div class="line"> *<span class="javadoctag"> @param</span> sortOrder 排序</div><div class="line"> *<span class="javadoctag"> @return</span></div><div class="line"> */</div><div class="line"><span class="keyword">public</span> Cursor <span class="title">query</span>(Uri uri, String[] projection, String selection,</div><div class="line">              String[] selectionArgs, String sortOrder) ;         </div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 用于返回当前Uri所代表数据的MIME类型</div><div class="line"> * 如果操作的数据为集合类型(多条数据),那么返回的类型字符串应该为vnd.android.cursor.dir/开头</div><div class="line"> * 例如要得到所有person记录的Uri为content://com.bravestarr.provider.personprovider/person,</div><div class="line">　　　　 *　　　那么返回的MIME类型字符串应该为"vnd.android.cursor.dir/person"</div><div class="line"> * 如果操作的数据为单一数据,那么返回的类型字符串应该为vnd.android.cursor.item/开头</div><div class="line"> * 例如要得到id为10的person记录的Uri为content://com.bravestarr.provider.personprovider/person/10,</div><div class="line">　　　　 *　　　那么返回的MIME类型字符串应该为"vnd.android.cursor.item/person"</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> String <span class="title">getType</span>(Uri uri)</div></pre></td></tr></table></figure>
+
+<p>这些方法中的Uri参数,得到后需要进行解析然后做对应处理,Uri表示要操作的数据,包含两部分信息:</p>
+<ul>
+<li>1)需要操作的contentprovider</li>
+<li><p>2)对contentprovider中的什么数据进行操作,一个Uri格式:</p>
+<pre><code> 结构头<span class="symbol">://authorities</span>(域名)/路径(要操作的数据,根据业务而定)
+ <span class="symbol">content:</span>/<span class="regexp">/com.bravestarr.provider.personprovider/person</span><span class="regexp">/10</span>
+</code></pre></li>
+</ul>
+<p>说明：contentprovider的结构头已经由android规定为content://authorities用于唯一标识这个contentprovider程序,外部调用者可以根据这个找到他,路径表示我们要操作的数据,路径的构建根据业务而定。路径格式如下:                                                        </p>
+<ul>
+<li>要操作person表行号为10的记录,可以这样构建/person/10</li>
+<li>要操作person表的所有记录,可以这样构建/person</li>
+</ul>
+<p>2、在AndroidManifest.xml中使用&lt; provider &gt;对ContentProvider进行配置注册(内容提供者注册它自己就像网站注册域名),ContentProvider采用authoritie(原意授权,可理解为域名)作为唯一标识,方便其他应用能找到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;application</div><div class="line">        android:icon="@drawable/ic_launcher"</div><div class="line">        android:label="@string/app_name" &gt;</div><div class="line">        &lt;!-- authorities属性命名建议:公司名.provider.SomeProvider--&gt;</div><div class="line">        &lt;provider android:name=".PersonProvider" android:authorities="com.bravestarr.provider.personprovider"/&gt;</div><div class="line">        ...</div><div class="line">&lt;/application&gt;</div></pre></td></tr></table></figure>
+
+<h1 id="总结：">总结：</h1>
+<h3 id="1、四大组件的注册">1、四大组件的注册</h3>
+<p>四大基本组件都需要注册才能使用,每个Activity、Service、Content Provider都需要在AndroidManifest文件中进行配置。AndroidManifest文件中未进行声明的activity、服务以及内容提供者将不为系统所见，从而也就不可用，而BroadcastReceive广播接收者的注册分静态注册（在AndroidManifest文件中进行配置）和通过代码动态创建并以调用Context.registerReceiver()的方式注册至系统。需要注意的是在AndroidManifest文件中进行配置的广播接收者会随系统的启动而一直处于活跃状态,只要接收到感兴趣的广播就会触发（即使程序未运行）。</p>
+<p>AndroidManifest文件中进行注册格式如下：</p>
+<ul>
+<li><activity\>元素的name 属性指定了实现了这个activity 的Activity 的子类。icon 和label 属性指向了包含展示给用户的此activity 的图标和标签的资源文件。</activity\></li>
+<li><service\> 元素用于声明服务</service\></li>
+<li><receiver\> 元素用于声明广播接收器</receiver\></li>
+<li><provider\> 元素用于声明内容提供者</provider\></li>
+</ul>
+<h3 id="2、四大组件的激活">2、四大组件的激活</h3>
+<p>• ContentProvider的激活：当接收到ContentResolver 发出的请求后，内容提供者被激活。而其它三种组件──activity、服务和广播接收器被一种叫做intent 的异步消息所激活。</p>
+<p>• Activity的激活：通过传递一个Intent 对象至Context.startActivity()或Activity.startActivityForResult()以载入（或指定新工作给）一个activity。相应的activity 可以通过调用getIntent() 方法来查看激活它的intent。如果它期望它所启动的那个activity 返回一个结果，它会以调用startActivityForResult()来取代startActivity()。比如说，如果它启动了另外一个Activity 以使用户挑选一张照片，它也许想知道哪张照片被选中了。结果将会被封装在一个Intent 对象中，并传递给发出调用的activity 的onActivityResult() 方法。</p>
+<p>• Service的激活：可以通过传递一个Intent 对象至Context.startService()或Context.bindService()前者Android 调用服务的onStart()方法并将Intent 对象传递给它，后者Android 调用服务的onBind()方法将这个Intent 对象传递给它。</p>
+<p>• BroadCastReceiver的激活：我们可以通过传递一个Intent对象来给Context.sendBroadcast()、Context.sendOrderedBroadcast()或Context.sendStickyBroadcast()来发送广播，Android会调用所有对此广播有兴趣的广播接收器的onReceive()方法，将intent传递给它们。</p>
+<h3 id="3、四大组件的关闭">3、四大组件的关闭</h3>
+<p>内容提供者仅在响应ContentResolver提出请求的时候激活。而一个广播接收器仅在响应广播信息的时候激活。所以，没有必要去显式的关闭这些组件。</p>
+<p>Activity关闭：可以通过调用它的finish()方法来关闭一个activity。</p>
+<p>服务关闭：对于通过startService()方法启动的服务要调用Context.stopService()方法关闭服务，使用bindService()方法启动的服务要调用Contex.unbindService()方法关闭服务。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>四大组件分别是Activity、Service、Content Provider、BroadcastReceiver。</p>
+<h1 id="一、四大组件的介绍">一、四大组件的介绍</h1>
+<h2 id="1、Activity">1、Activity</h2>
+<p>应用程序中，一个Activity通常就是一个单独的屏幕，它上面可以显示一些控件也可以监听并处理用户的事件，做出响应。<br>]]>
+    
+    </summary>
+    
+      <category term="四大组件" scheme="http://yoursite.com/tags/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/"/>
+    
+      <category term="Intent" scheme="http://yoursite.com/tags/Intent/"/>
+    
+      <category term="生命周期" scheme="http://yoursite.com/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="回顾总结" scheme="http://yoursite.com/tags/%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android异步消息机制完全解析]]></title>
+    <link href="http://yoursite.com/2014/11/09/Android%E5%BC%82%E6%AD%A5%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/"/>
+    <id>http://yoursite.com/2014/11/09/Android异步消息机制完全解析/</id>
+    <published>2014-11-09T13:46:15.000Z</published>
+    <updated>2014-11-09T15:30:46.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>开始进入正题，我们都知道，Android UI是线程不安全的，如果在子线程中尝试进行UI操作，程序就有可能会崩溃。相信大家在日常的工作当中都会经常遇到这个问题，解决的方案应该也是早已烂熟于心，即创建一个Message对象，然后借助Handler发送出去，之后在Handler的handleMessage()方法中获得刚才发送的Message对象，然后在这里进行UI操作就不会崩溃了。</p>
+</blockquote>
+<p>这种处理方式被称为<strong>异步</strong>消息处理线程，虽然我相信大家都会用，可是你知道它背后的原理是什么样的吗？今天我们就来一起深入探究一下Handler和Message背后的秘密。<br><a id="more"></a><br>首先来看一下如何创建Handler对象。你可能会觉得挺纳闷的，创建Handler有什么好看的呢，直接new一下不就行了？确实，不过即使只是简单new一下，还是有不少地方需要注意的，我们尝试在程序中创建两个Handler对象，一个在主线程中创建，一个在子线程中创建，代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> Handler handler1;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> Handler handler2;</div><div class="line"></div><div class="line">	<span class="annotation">@Override</span></div><div class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span>(Bundle savedInstanceState) {</div><div class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.activity_main);</div><div class="line">		handler1 = <span class="keyword">new</span> Handler();</div><div class="line">		<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</div><div class="line">			<span class="annotation">@Override</span></div><div class="line">			<span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>() {</div><div class="line">				handler2 = <span class="keyword">new</span> Handler();</div><div class="line">			}</div><div class="line">		}).start();</div><div class="line">	}</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>如果现在运行一下程序，你会发现，在子线程中创建的Handler是会导致程序崩溃的，提示的错误信息为 Can’t create handler inside thread that has not called Looper.prepare() 。说是不能在没有调用Looper.prepare() 的线程中创建Handler，那我们尝试在子线程中先调用一下Looper.prepare()呢，代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</div><div class="line">	<span class="annotation">@Override</span></div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>() {</div><div class="line">		Looper.prepare();</div><div class="line">		handler2 = <span class="keyword">new</span> Handler();</div><div class="line">	}</div><div class="line">}).start();</div></pre></td></tr></table></figure>
+
+<p>果然这样就不会崩溃了，不过只满足于此显然是不够的，我们来看下Handler的源码，搞清楚为什么不调用Looper.prepare()就不行呢。Handler的无参构造函数如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="title">Handler</span>() {</div><div class="line">    <span class="keyword">if</span> (FIND_POTENTIAL_LEAKS) {</div><div class="line">        <span class="keyword">final</span> Class&lt;? extends Handler&gt; klass = getClass();</div><div class="line">        <span class="keyword">if</span> ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &&</div><div class="line">                (klass.getModifiers() & Modifier.STATIC) == <span class="number">0</span>) {</div><div class="line">            Log.w(TAG, <span class="string">"The following Handler class should be static or leaks might occur: "</span> +</div><div class="line">                klass.getCanonicalName());</div><div class="line">        }</div><div class="line">    }</div><div class="line">    mLooper = Looper.myLooper();</div><div class="line">    <span class="keyword">if</span> (mLooper == <span class="keyword">null</span>) {</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(</div><div class="line">            <span class="string">"Can't create handler inside thread that has not called Looper.prepare()"</span>);</div><div class="line">    }</div><div class="line">    mQueue = mLooper.mQueue;</div><div class="line">    mCallback = <span class="keyword">null</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>可以看到，在第10行调用了Looper.myLooper()方法获取了一个Looper对象，如果Looper对象为空，则会抛出一个运行时异常，提示的错误正是 Can’t create handler inside thread that has not called Looper.prepare()！那什么时候Looper对象才可能为空呢？这就要看看Looper.myLooper()中的代码了，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Looper <span class="title">myLooper</span>() {</div><div class="line">    <span class="keyword">return</span> (Looper)sThreadLocal.get();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这个方法非常简单，就是从sThreadLocal对象中取出Looper。如果sThreadLocal中有Looper存在就返回Looper，如果没有Looper存在自然就返回空了。因此你可以想象得到是在哪里给sThreadLocal设置Looper了吧，当然是Looper.prepare()方法！我们来看下它的源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">prepare</span>() {</div><div class="line">    <span class="keyword">if</span> (sThreadLocal.get() != <span class="keyword">null</span>) {</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Only one Looper may be created per thread"</span>);</div><div class="line">    }</div><div class="line">    sThreadLocal.set(<span class="keyword">new</span> Looper());</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>可以看到，首先判断sThreadLocal中是否已经存在Looper了，如果还没有则创建一个新的Looper设置进去。这样也就完全解释了为什么我们要先调用Looper.prepare()方法，才能创建Handler对象。同时也可以看出每个线程中最多只会有一个Looper对象。</p>
+<p>咦？不对呀！主线程中的Handler也没有调用Looper.prepare()方法，为什么就没有崩溃呢？细心的朋友我相信都已经发现了这一点，这是由于在程序启动的时候，系统已经帮我们自动调用了Looper.prepare()方法。查看ActivityThread中的main()方法，代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(String[] args) {</div><div class="line">    SamplingProfilerIntegration.start();</div><div class="line">    CloseGuard.setEnabled(<span class="keyword">false</span>);</div><div class="line">    Environment.initForCurrentUser();</div><div class="line">    EventLogger.setReporter(<span class="keyword">new</span> EventLoggingReporter());</div><div class="line">    Process.setArgV0(<span class="string">"&lt;pre-initialized&gt;"</span>);</div><div class="line">    Looper.prepareMainLooper();</div><div class="line">    ActivityThread thread = <span class="keyword">new</span> ActivityThread();</div><div class="line">    thread.attach(<span class="keyword">false</span>);</div><div class="line">    <span class="keyword">if</span> (sMainThreadHandler == <span class="keyword">null</span>) {</div><div class="line">        sMainThreadHandler = thread.getHandler();</div><div class="line">    }</div><div class="line">    AsyncTask.init();</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">false</span>) {</div><div class="line">        Looper.myLooper().setMessageLogging(<span class="keyword">new</span> LogPrinter(Log.DEBUG, <span class="string">"ActivityThread"</span>));</div><div class="line">    }</div><div class="line">    Looper.loop();</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Main thread loop unexpectedly exited"</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>可以看到，在第7行调用了Looper.prepareMainLooper()方法，而这个方法又会再去调用Looper.prepare()方法，代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">prepareMainLooper</span>() {</div><div class="line">    prepare();</div><div class="line">    setMainLooper(myLooper());</div><div class="line">    <span class="keyword">if</span> (Process.supportsProcesses()) {</div><div class="line">        myLooper().mQueue.mQuitAllowed = <span class="keyword">false</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>因此我们应用程序的主线程中会始终存在一个Looper对象，从而不需要再手动去调用Looper.prepare()方法了。</p>
+<p>这样基本就将Handler的创建过程完全搞明白了，总结一下就是在主线程中可以直接创建Handler对象，而在子线程中需要先调用Looper.prepare()才能创建Handler对象。</p>
+<p>看完了如何创建Handler之后，接下来我们看一下如何发送消息，这个流程相信大家也已经非常熟悉了，new出一个Message对象，然后可以使用setData()方法或arg参数等方式为消息携带一些数据，再借助Handler将消息发送出去就可以了，示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</div><div class="line">	<span class="annotation">@Override</span></div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>() {</div><div class="line">		Message message = <span class="keyword">new</span> Message();</div><div class="line">		message.arg1 = <span class="number">1</span>;</div><div class="line">		Bundle bundle = <span class="keyword">new</span> Bundle();</div><div class="line">		bundle.putString(<span class="string">"data"</span>, <span class="string">"data"</span>);</div><div class="line">		message.setData(bundle);</div><div class="line">		handler.sendMessage(message);</div><div class="line">	}</div><div class="line">}).start();</div></pre></td></tr></table></figure>
+
+<p>可是这里Handler到底是把Message发送到哪里去了呢？为什么之后又可以在Handler的handleMessage()方法中重新得到这条Message呢？看来又需要通过阅读源码才能解除我们心中的疑惑了，Handler中提供了很多个发送消息的方法，其中除了sendMessageAtFrontOfQueue()方法之外，其它的发送消息方法最终都会辗转调用到sendMessageAtTime()方法中，这个方法的源码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">sendMessageAtTime</span>(Message msg, <span class="keyword">long</span> uptimeMillis)</div><div class="line">{</div><div class="line">    <span class="keyword">boolean</span> sent = <span class="keyword">false</span>;</div><div class="line">    MessageQueue queue = mQueue;</div><div class="line">    <span class="keyword">if</span> (queue != <span class="keyword">null</span>) {</div><div class="line">        msg.target = <span class="keyword">this</span>;</div><div class="line">        sent = queue.enqueueMessage(msg, uptimeMillis);</div><div class="line">    }</div><div class="line">    <span class="keyword">else</span> {</div><div class="line">        RuntimeException e = <span class="keyword">new</span> RuntimeException(</div><div class="line">            <span class="keyword">this</span> + <span class="string">" sendMessageAtTime() called with no mQueue"</span>);</div><div class="line">        Log.w(<span class="string">"Looper"</span>, e.getMessage(), e);</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> sent;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>sendMessageAtTime()方法接收两个参数，其中msg参数就是我们发送的Message对象，而uptimeMillis参数则表示发送消息的时间，它的值等于自系统开机到当前时间的毫秒数再加上延迟时间，如果你调用的不是sendMessageDelayed()方法，延迟时间就为0，然后将这两个参数都传递到MessageQueue的enqueueMessage()方法中。这个MessageQueue又是什么东西呢？其实从名字上就可以看出了，它是一个消息队列，用于将所有收到的消息以队列的形式进行排列，并提供入队和出队的方法。这个类是在Looper的构造函数中创建的，因此一个Looper也就对应了一个MessageQueue。<br>那么enqueueMessage()方法毫无疑问就是入队的方法了，我们来看下这个方法的源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="keyword">boolean</span> enqueueMessage(Message msg, <span class="keyword">long</span> when) {</div><div class="line">    <span class="keyword">if</span> (msg.when != <span class="number">0</span>) {</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> AndroidRuntimeException(msg + <span class="string">" This message is already in use."</span>);</div><div class="line">    }</div><div class="line">    <span class="keyword">if</span> (msg.target == <span class="keyword">null</span> && !mQuitAllowed) {</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Main thread not allowed to quit"</span>);</div><div class="line">    }</div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {</div><div class="line">        <span class="keyword">if</span> (mQuiting) {</div><div class="line">            RuntimeException e = <span class="keyword">new</span> RuntimeException(msg.target + <span class="string">" sending message to a Handler on a dead thread"</span>);</div><div class="line">            Log.w(<span class="string">"MessageQueue"</span>, e.getMessage(), e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (msg.target == <span class="keyword">null</span>) {</div><div class="line">            mQuiting = <span class="keyword">true</span>;</div><div class="line">        }</div><div class="line">        msg.when = when;</div><div class="line">        Message p = mMessages;</div><div class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span> || when == <span class="number">0</span> || when &lt; p.when) {</div><div class="line">            msg.next = p;</div><div class="line">            mMessages = msg;</div><div class="line">            <span class="keyword">this</span>.notify();</div><div class="line">        } <span class="keyword">else</span> {</div><div class="line">            Message prev = <span class="keyword">null</span>;</div><div class="line">            <span class="keyword">while</span> (p != <span class="keyword">null</span> && p.when &lt;= when) {</div><div class="line">                prev = p;</div><div class="line">                p = p.next;</div><div class="line">            }</div><div class="line">            msg.next = prev.next;</div><div class="line">            prev.next = msg;</div><div class="line">            <span class="keyword">this</span>.notify();</div><div class="line">        }</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>首先你要知道，MessageQueue并没有使用一个集合把所有的消息都保存起来，它只使用了一个mMessages对象表示当前待处理的消息。然后观察上面的代码的16~31行我们就可以看出，所谓的入队其实就是将所有的消息按时间来进行排序，这个时间当然就是我们刚才介绍的uptimeMillis参数。具体的操作方法就根据时间的顺序调用msg.next，从而为每一个消息指定它的下一个消息是什么。当然如果你是通过sendMessageAtFrontOfQueue()方法来发送消息的，它也会调用enqueueMessage()来让消息入队，只不过时间为0，这时会把mMessages赋值为新入队的这条消息，然后将这条消息的next指定为刚才的mMessages，这样也就完成了添加消息到队列头部的操作。<br>现在入队操作我们就已经看明白了，那出队操作是在哪里进行的呢?这个就需要看一看Looper.loop()方法的源码了，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">loop</span>() {</div><div class="line">    Looper me = myLooper();</div><div class="line">    MessageQueue queue = me.mQueue;</div><div class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) {</div><div class="line">        Message msg = queue.next(); <span class="comment">// might block</span></div><div class="line">        <span class="keyword">if</span> (msg != <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">if</span> (msg.target == <span class="keyword">null</span>) {</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            }</div><div class="line">            <span class="keyword">if</span> (me.mLogging!= <span class="keyword">null</span>) me.mLogging.println(</div><div class="line">                    <span class="string">"&gt;&gt;&gt;&gt;&gt; Dispatching to "</span> + msg.target + <span class="string">" "</span></div><div class="line">                    + msg.callback + <span class="string">": "</span> + msg.what</div><div class="line">                    );</div><div class="line">            msg.target.dispatchMessage(msg);</div><div class="line">            <span class="keyword">if</span> (me.mLogging!= <span class="keyword">null</span>) me.mLogging.println(</div><div class="line">                    <span class="string">"&lt;&lt;&lt;&lt;&lt; Finished to    "</span> + msg.target + <span class="string">" "</span></div><div class="line">                    + msg.callback);</div><div class="line">            msg.recycle();</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>可以看到，这个方法从第4行开始，进入了一个死循环，然后不断地调用的MessageQueue的next()方法，我想你已经猜到了，这个next()方法就是消息队列的出队方法。不过由于这个方法的代码稍微有点长，我就不贴出来了，它的简单逻辑就是如果当前MessageQueue中存在mMessages(即待处理消息)，就将这个消息出队，然后让下一条消息成为mMessages，否则就进入一个阻塞状态，一直等到有新的消息入队。继续看loop()方法的第14行，每当有一个消息出队，就将它传递到msg.target的dispatchMessage()方法中，那这里msg.target又是什么呢？其实就是Handler啦，你观察一下上面sendMessageAtTime()方法的第6行就可以看出来了。接下来当然就要看一看Handler中dispatchMessage()方法的源码了，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispatchMessage</span>(Message msg) {</div><div class="line">    <span class="keyword">if</span> (msg.callback != <span class="keyword">null</span>) {</div><div class="line">        handleCallback(msg);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        <span class="keyword">if</span> (mCallback != <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">if</span> (mCallback.handleMessage(msg)) {</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            }</div><div class="line">        }</div><div class="line">        handleMessage(msg);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>在第5行进行判断，如果mCallback不为空，则调用mCallback的handleMessage()方法，否则直接调用Handler的handleMessage()方法，并将消息对象作为参数传递过去。这样我相信大家就都明白了为什么handleMessage()方法中可以获取到之前发送的消息了吧！</p>
+<p>因此，一个最标准的异步消息处理线程的写法应该是这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class LooperThread extends Thread {</div><div class="line">      <span class="keyword">public</span> Handler mHandler;</div><div class="line"></div><div class="line">      <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>() {</div><div class="line">          Looper.prepare();</div><div class="line"></div><div class="line">          mHandler = <span class="keyword">new</span> Handler() {</div><div class="line">              <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span>(Message msg) {</div><div class="line">                  <span class="comment">// process incoming messages here</span></div><div class="line">              }</div><div class="line">          };</div><div class="line"></div><div class="line">          Looper.loop();</div><div class="line">      }</div><div class="line">  }</div></pre></td></tr></table></figure>
+
+<p>当然，这段代码是从Android官方文档上复制的，不过大家现在再来看这段代码，是不是理解的更加深刻了？<br>那么我们还是要来继续分析一下，为什么使用异步消息处理的方式就可以对UI进行操作了呢？这是由于Handler总是依附于创建时所在的线程，比如我们的Handler是在主线程中创建的，而在子线程中又无法直接对UI进行操作，于是我们就通过一系列的发送消息、入队、出队等环节，最后调用到了Handler的handleMessage()方法中，这时的handleMessage()方法已经是在主线程中运行的，因而我们当然可以在这里进行UI操作了。整个异步消息处理流程的示意图如下图所示：<br><img src="http://jackhai.qiniudn.com/异步消息处理机制.png" alt="alt text" title="jackhai异步消息"><br>另外除了发送消息之外，我们还有以下几种方法可以在子线程中进行UI操作：</p>
+<ol>
+<li>Handler的post()方法</li>
+<li>View的post()方法</li>
+<li>Activity的runOnUiThread()方法<br>我们先来看下Handler中的post()方法，代码如下所示：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">post</span>(Runnable r)</div><div class="line">{</div><div class="line">   <span class="keyword">return</span>  sendMessageDelayed(getPostMessage(r), <span class="number">0</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>原来这里还是调用了sendMessageDelayed()方法去发送一条消息啊，并且还使用了getPostMessage()方法将Runnable对象转换成了一条消息，我们来看下这个方法的源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> Message <span class="title">getPostMessage</span>(Runnable r) {</div><div class="line">    Message m = Message.obtain();</div><div class="line">    m.callback = r;</div><div class="line">    <span class="keyword">return</span> m;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>在这个方法中将消息的callback字段的值指定为传入的Runnable对象。咦？这个callback字段看起来有些眼熟啊，喔！在Handler的dispatchMessage()方法中原来有做一个检查，如果Message的callback等于null才会去调用handleMessage()方法，否则就调用handleCallback()方法。那我们快来看下handleCallback()方法中的代码吧：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">handleCallback</span>(Message message) {</div><div class="line">    message.callback.run();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>也太简单了！竟然就是直接调用了一开始传入的Runnable对象的run()方法。因此在子线程中通过Handler的post()方法进行UI操作就可以这么写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Handler handler;</div><div class="line"></div><div class="line">	<span class="annotation">@Override</span></div><div class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span>(Bundle savedInstanceState) {</div><div class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.activity_main);</div><div class="line">		handler = <span class="keyword">new</span> Handler();</div><div class="line">		<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</div><div class="line">			<span class="annotation">@Override</span></div><div class="line">			<span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>() {</div><div class="line">				handler.post(<span class="keyword">new</span> Runnable() {</div><div class="line">					<span class="annotation">@Override</span></div><div class="line">					<span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>() {</div><div class="line">						<span class="comment">// 在这里进行UI操作</span></div><div class="line">					}</div><div class="line">				});</div><div class="line">			}</div><div class="line">		}).start();</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>虽然写法上相差很多，但是原理是完全一样的，我们在Runnable对象的run()方法里更新UI，效果完全等同于在handleMessage()方法中更新UI。<br>然后再来看一下View中的post()方法，代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">post</span>(Runnable action) {</div><div class="line">    Handler handler;</div><div class="line">    <span class="keyword">if</span> (mAttachInfo != <span class="keyword">null</span>) {</div><div class="line">        handler = mAttachInfo.mHandler;</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        ViewRoot.getRunQueue().post(action);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> handler.post(action);</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>原来就是调用了Handler中的post()方法，我相信已经没有什么必要再做解释了。<br>最后再来看一下Activity中的runOnUiThread()方法，代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">runOnUiThread</span>(Runnable action) {</div><div class="line">    <span class="keyword">if</span> (Thread.currentThread() != mUiThread) {</div><div class="line">        mHandler.post(action);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        action.run();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>如果当前的线程不等于UI线程(主线程)，就去调用Handler的post()方法，否则就直接调用Runnable对象的run()方法。还有什么会比这更清晰明了的吗？</p>
+<p><strong>通过以上所有源码的分析，我们已经发现了，不管是使用哪种方法在子线程中更新UI，其实背后的原理都是相同的，必须都要借助异步消息处理的机制来实现</strong>，而我们又已经将这个机制的流程完全搞明白了，真是一件一本万利的事情啊。</p>
+<p><a href="http://blog.csdn.net/guolin_blog/article/details/9991569" target="_blank" rel="external">原文</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>开始进入正题，我们都知道，Android UI是线程不安全的，如果在子线程中尝试进行UI操作，程序就有可能会崩溃。相信大家在日常的工作当中都会经常遇到这个问题，解决的方案应该也是早已烂熟于心，即创建一个Message对象，然后借助Handler发送出去，之后在Handler的handleMessage()方法中获得刚才发送的Message对象，然后在这里进行UI操作就不会崩溃了。</p>
+</blockquote>
+<p>这种处理方式被称为<strong>异步</strong>消息处理线程，虽然我相信大家都会用，可是你知道它背后的原理是什么样的吗？今天我们就来一起深入探究一下Handler和Message背后的秘密。<br>]]>
+    
+    </summary>
+    
+      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
+    
+      <category term="异步消息" scheme="http://yoursite.com/tags/%E5%BC%82%E6%AD%A5%E6%B6%88%E6%81%AF/"/>
+    
+      <category term="Handler" scheme="http://yoursite.com/tags/Handler/"/>
+    
+      <category term="Looper" scheme="http://yoursite.com/tags/Looper/"/>
+    
+      <category term="Message" scheme="http://yoursite.com/tags/Message/"/>
+    
+      <category term="MessageQueue" scheme="http://yoursite.com/tags/MessageQueue/"/>
+    
+      <category term="转载" scheme="http://yoursite.com/categories/%E8%BD%AC%E8%BD%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[SQLiteDatabase的query()和rawQuery()有什么区别?]]></title>
+    <link href="http://yoursite.com/2014/11/08/SQLiteDatabase%E7%9A%84query-%E5%92%8CrawQuery-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2014/11/08/SQLiteDatabase的query-和rawQuery-有什么区别/</id>
+    <published>2014-11-08T14:24:21.000Z</published>
+    <updated>2014-11-09T15:33:15.000Z</updated>
+    <content type="html"><![CDATA[<pre><code>Cursor cursor = db.rawQuery(<span class="string">"select name from ** where _id=?"</span>, <span class="keyword">new</span> <span class="built_in">String</span>[]{<span class="string">"1"</span>});
+Cursor cursor = db.query(<span class="string">"**"</span>, <span class="keyword">new</span> <span class="built_in">String</span>[]{<span class="string">"name"</span>}, <span class="string">"_id=?"</span>, <span class="keyword">new</span> <span class="built_in">String</span>[]{<span class="string">"1"</span>}, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);
+</code></pre><p>上面分别是query和rawQuery的查询语句，主要区别是rawQuery是直接使用SQL语句进行查询；而query函数是Android自己封装的查询API。源码如下：<br><a id="more"></a>    </p>
+<pre><code><span class="comment">//--这是query()--</span>
+<span class="keyword">public</span> Cursor query(<span class="built_in">String</span> table, <span class="built_in">String</span>[] columns, <span class="built_in">String</span> selection, <span class="built_in">String</span>[] selectionArgs, <span class="built_in">String</span> groupBy, <span class="built_in">String</span> having, <span class="built_in">String</span> orderBy) {
+    <span class="keyword">return</span> query(<span class="literal">false</span>, table, columns, selection, selectionArgs, groupBy, having, orderBy, <span class="literal">null</span> <span class="comment">/* limit */</span>);
+}
+
+<span class="keyword">public</span> Cursor query(<span class="built_in">boolean</span> distinct, <span class="built_in">String</span> table, <span class="built_in">String</span>[] columns, <span class="built_in">String</span> selection, <span class="built_in">String</span>[] selectionArgs, <span class="built_in">String</span> groupBy, <span class="built_in">String</span> having, <span class="built_in">String</span> orderBy, <span class="built_in">String</span> limit) {
+    <span class="keyword">return</span> queryWithFactory(<span class="literal">null</span>, distinct, table, columns, selection, selectionArgs, groupBy, having, orderBy, limit, <span class="literal">null</span>);
+}
+
+<span class="keyword">public</span> Cursor queryWithFactory(CursorFactory cursorFactory, <span class="built_in">boolean</span> distinct, <span class="built_in">String</span> table, <span class="built_in">String</span>[] columns, <span class="built_in">String</span> selection, <span class="built_in">String</span>[] selectionArgs, <span class="built_in">String</span> groupBy, <span class="built_in">String</span> having, <span class="built_in">String</span> orderBy, <span class="built_in">String</span> limit, CancellationSignal cancellationSignal) {
+    acquireReference();
+    <span class="keyword">try</span> {
+        <span class="built_in">String</span> sql = SQLiteQueryBuilder.buildQueryString(distinct, table, columns, selection, groupBy, having, orderBy, limit);
+        <span class="keyword">return</span> rawQueryWithFactory(cursorFactory, sql, selectionArgs, findEditTable(table), cancellationSignal);
+    } <span class="keyword">finally</span> {
+        releaseReference();
+    }
+}
+
+<span class="comment">//最终调用的就是这个方法。</span>
+<span class="keyword">public</span> Cursor rawQueryWithFactory(CursorFactory cursorFactory, <span class="built_in">String</span> sql, <span class="built_in">String</span>[] selectionArgs, <span class="built_in">String</span> editTable, CancellationSignal cancellationSignal) {
+    acquireReference();
+    <span class="keyword">try</span> {
+        SQLiteCursorDriver driver = <span class="keyword">new</span> SQLiteDirectCursorDriver(<span class="keyword">this</span>, sql, editTable, cancellationSignal);
+        <span class="keyword">return</span> driver.query(cursorFactory != <span class="literal">null</span> ? cursorFactory : mCursorFactory, selectionArgs);
+    } <span class="keyword">finally</span> {
+        releaseReference();
+    }
+}
+
+
+<span class="comment">//--这是rawQuery()--</span>
+<span class="keyword">public</span> Cursor rawQuery(<span class="built_in">String</span> sql, <span class="built_in">String</span>[] selectionArgs) {
+    <span class="keyword">return</span> rawQueryWithFactory(<span class="literal">null</span>, sql, selectionArgs, <span class="literal">null</span>, <span class="literal">null</span>);
+}
+
+<span class="comment">//最终调用的还是这个方法。</span>
+<span class="keyword">public</span> Cursor rawQueryWithFactory(CursorFactory cursorFactory, <span class="built_in">String</span> sql, <span class="built_in">String</span>[] selectionArgs, <span class="built_in">String</span> editTable, CancellationSignal cancellationSignal) {
+    acquireReference();
+    <span class="keyword">try</span> {
+        SQLiteCursorDriver driver = <span class="keyword">new</span> SQLiteDirectCursorDriver(<span class="keyword">this</span>, sql, editTable, cancellationSignal);
+        <span class="keyword">return</span> driver.query(cursorFactory != <span class="literal">null</span> ? cursorFactory : mCursorFactory, selectionArgs);
+    } <span class="keyword">finally</span> {
+        releaseReference();
+    }
+}
+</code></pre><p>发现：最后调用的都是<strong>rawQueryWithFactory</strong>(CursorFactory,String,String[],String,CancellationSignal) 这个方法。</p>
+<p>回到问题上，这两个方法的区别在于，最终的 SQL 语句，谁来拼？,query() 做的一件事就是帮你拼写 SQL 语句，而调用 rawQuery() 是你自己拼写语句。其实但从字面上也好理解：rawQuery就是你使用原始SQL语句查询，raw是生的、原始的意思；query就是你使用封装好的API查询。</p>
+<p>query对比rawQuery来讲就有一个好处，rawQuery你在写入SQL语句的时候，有可能写错了或者写漏了什么单词、拼写错误的时候会出错，而query相对来讲出错的机率就比较小。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<pre><code>Cursor cursor = db.rawQuery(<span class="string">"select name from ** where _id=?"</span>, <span class="keyword">new</span> <span class="built_in">String</span>[]{<span class="string">"1"</span>});
+Cursor cursor = db.query(<span class="string">"**"</span>, <span class="keyword">new</span> <span class="built_in">String</span>[]{<span class="string">"name"</span>}, <span class="string">"_id=?"</span>, <span class="keyword">new</span> <span class="built_in">String</span>[]{<span class="string">"1"</span>}, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);
+</code></pre><p>上面分别是query和rawQuery的查询语句，主要区别是rawQuery是直接使用SQL语句进行查询；而query函数是Android自己封装的查询API。源码如下：<br>]]>
+    
+    </summary>
+    
+      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[你不必这么着急]]></title>
+    <link href="http://yoursite.com/2014/11/08/%E4%BD%A0%E4%B8%8D%E5%BF%85%E8%BF%99%E4%B9%88%E7%9D%80%E6%80%A5/"/>
+    <id>http://yoursite.com/2014/11/08/你不必这么着急/</id>
+    <published>2014-11-07T18:25:51.000Z</published>
+    <updated>2014-11-09T15:32:34.000Z</updated>
+    <content type="html"><![CDATA[<p>现在这个世界，似乎一切都在快速演进：各种年少暴富的新闻充斥着我们的眼球，软件开发世界到处是敏捷方法，甚至你最亲近的人都在催促你更快——谁谁谁都已经XX了，你将来怎么打算？所以，现在的学生找实习的时间越来越早，想速成的心态越来越重。<br><a id="more"></a><br>但是，你不必这么着急。慢有慢的好处，最重要的是，急也急不来。我想和未走出社会的人分享一下，为什么是我们不用那么着急，并且应该把精力放去哪里。如果你已经工作数年了，但是对着未来感到恐惧，却从来没有试着让自己慢一点，也可以看一看接下来的内容。</p>
+<p>在继续阅读之前，先看几个问题，判断这篇文章是否适合你。</p>
+<ol>
+<li>并不是所有人都那么聪明的，有些人只需要过普通的生活就够了。</li>
+</ol>
+<p>对的，但我只想跟觉得自己足够聪明的人讨论后面的内容。实际上，我觉得没有什么聪不聪明之分，只是投入时间的问题。</p>
+<ol>
+<li>不是所有人都有那么崇高的理想的，这些内容太理想主义了。</li>
+</ol>
+<p>对的，但我也是只想跟心怀理想的人交流。</p>
+<ol>
+<li>我负有助学贷款压力/出身贫寒/其他急需资金的原因，没空让我停下来好好考虑。</li>
+</ol>
+<p>很遗憾，这部分人可能需要先解决温饱问题，待将来走出了困境，再仔细考虑一下前面的内容。</p>
+<p>你没有对上面的内容嗤之以鼻，那么，可以进入正题了。</p>
+<h3 id="为什么你不用这么着急"><strong>为什么你不用这么着急</strong></h3>
+<p>这里有着确切的理由，你不用这么着急</p>
+<h4 id="1-_工作岗位比你想象中多"><strong>1. 工作岗位比你想象中多</strong></h4>
+<p>对于真正的人才，工作机会是源源不断的。他们困扰的不是找工作，而是找有趣的工作。这听起来很气人，大学毕业有很多人找不到工作呢，很多人工作几年还在用“码农”调侃自己呢。</p>
+<p>但现实就是这样，企业缺人、缺人才，但是不缺平凡的人。企业发出一个招聘岗位，会收到数十上百封简历，但十有八九在第一轮人事MM筛选中就会去掉，真正到达缺人部门的领导手中时，又是十有八九看一眼就被淘汰掉了……等等，这是不是说找工作很难呢？正好相反，看问题得反过来看。</p>
+<p>试想你是一个部门领导，你的部门急需补充成员，否则会拖慢年度的计划安排。一个月两个月过去了，总看不到可塑之才出现。所以你得不断地到人事部催促，多发些招聘信息；人事MM每天被催促，恨不得天上掉下个技术大牛，活好收费少，赶紧把招聘任务了结了。这样的部门、这样的公司都处都是，他们都在焦急的等着那些合适的人。如果你恰好是那类人，入职就是一张机票的事。</p>
+<p>记住，关键是你是否能成为合适的人。“找”工作是没用的，只会成为那 (9/10 + 1/10 × 9/10) × 100%。最理想的是，让工作来找你，这放在后面说。</p>
+<h4 id="2-_现实工作不一定有趣"><strong>2. 现实工作不一定有趣</strong></h4>
+<p>假设你已经足够成为那类公司热烈欢迎的人了，是不是得赶紧走出社会“积累积累”经验了呢？</p>
+<p>我给建议依然是：别急。现实工作不一定有趣，无趣的工作意味着工作效率低下，工作效率低下意味着经验增长缓慢，经验增长缓慢的工作，还不知蹲在家里每天写8个小时代码呢。</p>
+<p>一般说来，越大的公司越无趣，因为大公司有复杂的流程。如果你的工作环境被切割成了设计-UI-编码的团队界限分明的结构，那么你的发挥空间就很小了。你的最大目标是实现别人的需求，你需要实现很繁琐的注册表单和根本没人会用的后台控制；你需要在每个a标签里面放一些不必要的span；你需要学会写 ugly 的代码，因为时间紧/反正用得很好/要跟周围风格一致。另一方面，小公司也会让你很无趣，你需要做运维/产品/设计/编码/维护，半夜收到异常Email要起床，还要吃着老板画给你的“等公司上了轨道一定不会亏待你的”的大饼。</p>
+<p>天阿，让不让人活了！</p>
+<p>其实分辨工作是否有趣很简单：招人最靠谱的是看作品，找工作最靠谱的当然就是看产品了。看公司的产品，你觉得有不有趣，你自己会不会用，细节做得好吗，是又一个 C2C（Copy to China） 吗？从公司的产品，就可以看出公司的内部架构和流程，员工工作得愉不愉快，创意有没有施展的空间。我觉得，Twitter，Github 那样的公司就挺好。</p>
+<p>要去，就要去有趣的公司，世界上缺工作的人那么多，为什么要跟他们争抢一份平凡的工作呢？</p>
+<h3 id="把精力花到刀刃上"><strong>把精力花到刀刃上</strong></h3>
+<p>如果你接受了我上面说的理由，那么可以淡定的看待身边一个又一个找到实习或者工作的同学了，因为你需要认真地挖掘什么才是你需要持久钻研的东西。</p>
+<h4 id="1-_多参与开源项目"><strong>1. 多参与开源项目</strong></h4>
+<p><a href="https://github.com/" target="_blank" rel="external">github.com</a> 不用多说了，现在已经成为技术人员最好的简历。</p>
+<p>有了 github，参与开源项目成为一件很简单的事情：使用 -&gt; 发现 bug -&gt; 查找/提交 issues -&gt; 提交 pull-request。</p>
+<p>不过，要一开始就参加一个热门的项目是很困难的，因为有很多比你聪明（本质只是编程时间比你长）的人都在上面折腾，根本没有让你“接球”的机会。</p>
+<p>这时候最好自己发展一个开源项目。</p>
+<p>可以练手的项目类型多着呢：你的博客/Todo-list好用吗？你觉得某个现有的服务/项目很搓吗？你需要帮你随机决定中午午餐吃什么而且自动发送邀请给好友的机器人程序吗？</p>
+<p>发挥你的想象力，做一个实际能用的项目，比到公司打杂有用多了。</p>
+<h4 id="2-_多参与社区讨论"><strong>2. 多参与社区讨论</strong></h4>
+<p>你得了解你学习的技术方向的牛人在哪里混，多跟他们交流，也多回答新手的提问，在网络社区里很有可能你会遇到你将来的同事或者合伙人。</p>
+<p>编程是一项社会活动，即使你的程序完全是交给机器执行，但是最终的使用者和受益者是人类，所以你需要认识各种各样的人，了解你是为了什么去编程。</p>
+<p>如果你学习 Ruby，我推荐 <a href="https://ruby-china.org/" target="_blank" rel="external">ruby-china.org</a>，这是当前国内人气最旺的 Ruby 社区了。当然，还有 <a href="http://codecampo.com/" target="_blank" rel="external">CodeCampo</a>，你可以看到 Rei 分享的各类奇怪资源。</p>
+<h4 id="3-_多进行户外活动"><strong>3. 多进行户外活动</strong></h4>
+<p>多进行户外活动，即可以强健体魄，也可以让你的性格更开朗。性格开朗的人，创造力会比整天闷闷不乐的人高。这里就有一个乐天向上好榜样：<a href="http://imtx.me/archives/1713.html" target="_blank" rel="external">辞职旅行一周年</a>。</p>
+<h3 id="勇敢的编程_10000_小时"><strong>勇敢的编程 10000 小时</strong></h3>
+<p>程序世界是非常公平的，随着你编程经验的积累，你的项目用户会开始增多，你的交友圈会更广泛，你的工作机会会找上门——或者该你给别人工作机会了。</p>
+<p>无论怎么样，要成为技术牛人，编程 10000 小时是少不了的。无论你愿不愿意，你的经验都在增加，所以你完全不用心急。</p>
+<p>看清自己的目标，一步一步的走，有一天它就会在你脚下。</p>
+<p><a href="http://chloerei.com/2012/04/18/you-do-not-need-such-a-hurry/" target="_blank" rel="external">原文</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>现在这个世界，似乎一切都在快速演进：各种年少暴富的新闻充斥着我们的眼球，软件开发世界到处是敏捷方法，甚至你最亲近的人都在催促你更快——谁谁谁都已经XX了，你将来怎么打算？所以，现在的学生找实习的时间越来越早，想速成的心态越来越重。<br>]]>
+    
+    </summary>
+    
+      <category term="文章" scheme="http://yoursite.com/tags/%E6%96%87%E7%AB%A0/"/>
+    
+      <category term="转载" scheme="http://yoursite.com/categories/%E8%BD%AC%E8%BD%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[读书]]></title>
+    <link href="http://yoursite.com/2014/11/06/%E8%AF%BB%E4%B9%A6/"/>
+    <id>http://yoursite.com/2014/11/06/读书/</id>
+    <published>2014-11-06T14:48:55.000Z</published>
+    <updated>2014-11-09T16:16:13.000Z</updated>
+    <content type="html"><![CDATA[<p>几张图片</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>几张图片</p>
+]]>
+    </summary>
+    
+      <category term="读书" scheme="http://yoursite.com/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[转投Hexo--使用Hexo在GitHub写博客]]></title>
+    <link href="http://yoursite.com/2014/11/06/%E8%BD%AC%E6%8A%95hexo-%E4%BD%BF%E7%94%A8hexo%E5%9C%A8github%E5%86%99%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://yoursite.com/2014/11/06/转投hexo-使用hexo在github写博客/</id>
+    <published>2014-11-06T10:50:40.000Z</published>
+    <updated>2014-11-09T15:32:11.000Z</updated>
+    <content type="html"><![CDATA[<p>之前自搭<a href="http://jackhai.wordpress.com/" target="_blank" rel="external">WordPress</a>和Jekyll，感觉不够geek，虽然第一次用Jekyll的时候感觉cool毙了(累觉不爱)。更早之前使用<a href="http://jackhai.diandian.com/" target="_blank" rel="external">点点</a>、<a href="http://blog.sina.com.cn/u/2483023881" target="_blank" rel="external">新浪博客</a>、<a href="http://www.cnblogs.com/jackhai9/" target="_blank" rel="external">cnblogs</a>、<a href="http://jackhai9.blogspot.com/" target="_blank" rel="external">bloger</a>都只是浅尝辄止，现在还记得使用Windows Live Writer写新浪博客和博客园时那种惊艳的感觉。之后就把大部分东西都整理到个人笔记上了，用过有道、<a href="https://note.wiz.cn/i/57dec783" target="_blank" rel="external">为知</a>、Evernote，现在主力是为知，不怎么用印象，毕竟为知跟Chrome的组合已经让我习惯了，懒得换了。。<br><a id="more"></a></p>
+<h1 id="Hexo">Hexo</h1>
+<p>我只能说，这是个B格极高的程序猿写作方式，正合我意。如果你也纠结于要去哪里写博客，那就来GitHub吧，你懂得。</p>
+<p>hexo出自台湾大学生<a href="https://twitter.com/tommy351" target="_blank" rel="external">tommy351</a>之手，是一个基于Node.js的静态博客程序，其编译上百篇文字只需要几秒。hexo生成的静态网页可以直接放到GitHub Pages，BAE，SAE等平台上。先看看tommy是如何吐槽Octopress的 →＿→<a href="http://zespia.tw/blog/2012/10/11/hexo-debut/" target="_blank" rel="external">Hexo 颯爽登場！</a></p>
+<ul>
+<li>如果你对默认配置满意，只需几个命令便可秒搭一个hexo</li>
+<li>如果你跟我一样喜欢折腾下，30分钟也足够个性化。</li>
+<li>如果你过于喜欢折腾，可以折腾个把星期，尽情的玩。</li>
+</ul>
+<p>搭建过程你或许觉得有那么点小繁琐(其实只需要几个简单命令)，但一旦搭建完成，写文章是极简单，极舒服的。怎么个舒服法？</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo n  <span class="comment">#开写</span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g  <span class="comment">#生成</span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo d  <span class="comment">#部署，可与hexo g合并为hexo d -g</span></div></pre></td></tr></table></figure>
+
+<h3 id="安装和使用(Windows下)：">安装和使用(Windows下)：</h3>
+<h3 id="一、准备工作">一、准备工作</h3>
+<ol>
+<li>安装Node.js，安装Git，还需要GitHub账号。</li>
+<li>建立与你的GitHub用户名对应的仓库，仓库名必须为『your_user_name.github.com』，添加SSH公钥 <a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="external">这是方法</a>。</li>
+<li>以上完成后，使用 </li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">ssh</span> -T git<span class="variable">@github</span>.com</div></pre></td></tr></table></figure>
+
+<p> 验证是否成功。如出现Error: Permission denied (publickey)，则<a href="https://help.github.com/articles/error-permission-denied-publickey/" target="_blank" rel="external">点这里</a>。</p>
+<h3 id="二、安装及初始化">二、安装及初始化</h3>
+<ol>
+<li>在nodejs安装目录下使用cmd命令安装Hexo：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="operator"><span class="keyword">install</span> -g hexo</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>在你喜欢的地方新建一个目录，用来初始化你的博客和存放你以后的文章。</li>
+<li>进入你新建的目录(以后的命令基本上都在这个目录下执行)，打开cmd：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">init</span></div></pre></td></tr></table></figure>
+
+<p>好啦，至此，全部安装工作已经完成！</p>
+<h3 id="三、本地启动,预览下">三、本地启动,预览下</h3>
+<ol>
+<li>生成静态页面：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">generate</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>本地启动：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
+
+<p>浏览器输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>就可以看到效果。</p>
+<h3 id="四、写文章">四、写文章</h3>
+<ol>
+<li>新建文章</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">new</span> [layout] <span class="string">"postName"</span></div></pre></td></tr></table></figure>
+
+<p>执行new命令后，生成指定名称的文章至hexo\source_posts\postName.md。</p>
+<ol>
+<li><p>用你喜欢的编辑器打开文件 hexo\source_posts\postName.md 开始尽情书写吧。。。关于markdown语法，可以参考<a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">这里</a>。</p>
+</li>
+<li><p>写完后，</p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
+
+<p>，然后访问<a href="localhost:4000" target="_blank" rel="external">localhost:4000</a>预览效果。(退出server用Ctrl+c)。然后</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">hexo</span> deploy</div></pre></td></tr></table></figure>
+
+<p>同步到github。访问网站看看效果。 关于deploy，可以参考<a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">这里</a>。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>之前自搭<a href="http://jackhai.wordpress.com/" target="_blank" rel="external">WordPress</a>和Jekyll，感觉不够geek，虽然第一次用Jekyll的时候感觉cool毙了(累觉不爱)。更早之前使用<a href="http://jackhai.diandian.com/" target="_blank" rel="external">点点</a>、<a href="http://blog.sina.com.cn/u/2483023881" target="_blank" rel="external">新浪博客</a>、<a href="http://www.cnblogs.com/jackhai9/" target="_blank" rel="external">cnblogs</a>、<a href="http://jackhai9.blogspot.com/" target="_blank" rel="external">bloger</a>都只是浅尝辄止，现在还记得使用Windows Live Writer写新浪博客和博客园时那种惊艳的感觉。之后就把大部分东西都整理到个人笔记上了，用过有道、<a href="https://note.wiz.cn/i/57dec783" target="_blank" rel="external">为知</a>、Evernote，现在主力是为知，不怎么用印象，毕竟为知跟Chrome的组合已经让我习惯了，懒得换了。。<br>]]>
+    
+    </summary>
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
+    
+  </entry>
+  
+</feed>

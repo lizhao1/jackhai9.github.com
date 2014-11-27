@@ -1,0 +1,389 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android四大组件回顾总结(一) | Jackhai 从开始到现在</title>
+  <meta name="author" content="李振海">
+  
+  <meta name="description" content="可能孤独，但从不寂寞。记住：你应该努力去追求幸福。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Android四大组件回顾总结(一)"/>
+  <meta property="og:site_name" content="Jackhai 从开始到现在"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Jackhai 从开始到现在" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-56567610-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe5f997a31fb87652c76a3a8cdb3e4cf2' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Jackhai 从开始到现在</a></h1>
+  <h2><a href="/">对你我而言，遇到爱遇到性都不稀罕。稀罕的是遇到了解。 --- 雨季一过，交配的季节又到了</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-14T11:54:23.000Z"><a href="/2014/11/14/Android四大组件回顾总结/">11月 14 2014</a></time>
+      
+      
+  
+    <h1 class="title">Android四大组件回顾总结(一)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>四大组件分别是Activity、Service、Content Provider、BroadcastReceiver。</p>
+<h1 id="一、四大组件的介绍">一、四大组件的介绍</h1>
+<h2 id="1、Activity">1、Activity</h2>
+<p>应用程序中，一个Activity通常就是一个单独的屏幕，它上面可以显示一些控件也可以监听并处理用户的事件，做出响应。<br><a id="more"></a></p>
+<ul>
+<li>Activity之间通过Intent进行通信。在Intent的描述结构中，有两个最重要的部分：动作和动作对应的数据。</li>
+<li>典型的动作类型有：MAIN（activity的门户）、VIEW、PICK、EDIT等。而动作对应的数据则以URI的形式进行表示。例如：要查看一个人的联系方式，你需要创建一个动作类型为VIEW的intent，以及一个表示这个人的URI。</li>
+<li>与之有关系的一个类叫IntentFilter。相对于intent是一个有效的做某事的请求，一个intentfilter则用于描述一个activity（或者IntentReceiver）能够操作哪些intent。一个activity如果要显示一个人的联系方式时，需要声明一个IntentFilter，这个IntentFilter要知道怎么去处理VIEW动作和表示一个人的URI。IntentFilter需要在AndroidManifest.xml中定义。通过解析各种intent，从一个屏幕导航到另一个屏幕是很简单的。当向前导航时，activity将会调用startActivity(Intent myIntent)方法。然后，系统会在所有安装的应用程序中定义的IntentFilter中查找，找到最匹配myIntent的Intent对应的activity。新的activity接收到myIntent的通知后，开始运行。当startActivity方法被调用将触发解析myIntent的动作，这个机制提供了两个关键好处：<ul>
+<li>1、Activities能够重复利用从其它组件中以Intent的形式产生的一个请求；</li>
+<li>2、Activities可以在任何时候被一个具有相同IntentFilter的新的Activity取代。</li>
+</ul>
+</li>
+</ul>
+<p>AndroidManifest文件中含有如下过滤器的Activity组件为默认启动类，当程序启动时<strong>系统</strong>自动调用它：</p>
+<pre><code><span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span>
+   <span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.MAIN"</span> /&gt;</span>
+   <span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.category.LAUNCHER"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span>
+</code></pre><h2 id="2、BroadcastReceiver广播接收器">2、BroadcastReceiver广播接收器</h2>
+<p>你的应用可以使用它对外部事件进行过滤，只对感兴趣的外部事件(如当电话呼入时，或者数据网络可用时)进行接收并做出响应。广播接收器没有用户界面。然而，它们可以启动一个activity或serice来响应它们收到的信息，或者用NotificationManager来通知用户。通知可以用很多种方式来吸引用户的注意力──闪动背灯、震动、播放声音等。一般来说是在状态栏上放一个持久的图标，用户可以打开它并获取消息。</p>
+<p>广播类型：</p>
+<ul>
+<li>普通广播，通过Context.sendBroadcast(Intent myIntent)发送的</li>
+<li>有序广播，通过Context.sendOrderedBroadcast(intent, receiverPermission)发送的，该方法第2个参数决定该广播的级别，级别数值是在 -1000 到 1000 之间 , 值越大 , 发送的优先级越高；广播接收者接收广播时的级别（可通过intentfilter中的priority进行设置，设为2147483647时优先级最高），同级别接收的先后是随机的， 再到级别低的收到广播，高级别的或同级别先接收到广播的可以通过abortBroadcast()方法截断广播使其他的接收者无法收到该广播，还有其他构造函数</li>
+<li>异步广播，通过Context.sendStickyBroadcast(Intent myIntent)发送的，还有sendStickyOrderedBroadcast(intent, resultReceiver, scheduler,  initialCode, initialData, initialExtras)方法，该方法具有有序广播的特性也有异步广播的特性；发送异步广播要 <uses-permission android:name="android.permission.BROADCAST_STICKY"> 权限，接收并处理完Intent后，广播依然存在，直到你调用removeStickyBroadcast(intent)主动把它去掉</uses-permission></li>
+</ul>
+<p>注意：发送广播时的intent参数与Context.startActivity()启动起来的Intent不同,前者可以被多个订阅它的广播接收器调用,后者只能被一个(activity或service)调用。</p>
+<p>监听广播Intent步骤:</p>
+<ul>
+<li>1、写一个继承BroadCastReceiver的类,重写onReceive()方法,广播接收器仅在它执行这个方法时处于活跃状态。当onReceive()返回后，它即为失活状态，注意:为了保证用户交互过程的流畅，一些费时的操作要放到线程里，如类名SMSBroadcastReceiver。</li>
+<li><p>2、注册该广播接收者,注册有两种方法：程序动态注册和AndroidManifest文件中进行静态注册（可理解为系统中注册）如下：</p>
+<ul>
+<li><p>静态注册,注册的广播，下面的priority表示接收广播的级别”2147483647”为最高优先级</p>
+<pre><code><span class="tag">&lt;<span class="title">receiver</span> <span class="attribute">android:name</span>=<span class="value">".SMSBroadcastReceiver"</span> &gt;</span>
+   <span class="tag">&lt;<span class="title">intent-filter</span> <span class="attribute">android:priority</span> = "<span class="attribute">2147483647</span>" &gt;</span>
+<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.provider.Telephony.SMS_RECEIVED"</span> /&gt;</span>
+   <span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">receiver</span> &gt;</span>
+</code></pre></li>
+<li><p>动态注册，一般在Activity可交互时onResume()内注册BroadcastReceiver</p>
+<pre><code>IntentFilter intentFilter=<span class="keyword">new</span> IntentFilter(<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>);
+registerReceiver(mBatteryInfoReceiver ,intentFilter);
+
+<span class="comment">//反注册</span>
+unregisterReceiver(receiver);
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li><p>1.生命周期只有十秒左右，如果在 onReceive() 内做超过十秒内的事情，就会报ANR(Application No Response) 程序无响应的错误信息，如果需要完成一项比较耗时的工作 , 应该通过发送 Intent 给 Service, 由Service 来完成 . 这里不能使用子线程来解决 , 因为 BroadcastReceiver 的生命周期很短 , 子线程可能还没有结束BroadcastReceiver 就先结束了 .BroadcastReceiver 一旦结束 , 此时 BroadcastReceiver 的所在进程很容易在系统需要内存时被优先杀死 , 因为它属于空进程 ( 没有任何活动组件的进程 ). 如果它的宿主进程被杀死 , 那么正在工作的子线程也会被杀死 . 所以采用子线程来解决是不可靠的.</p>
+</li>
+<li><p>2.动态注册广播接收器还有一个特点，就是当用来注册的Activity关掉后，广播也就失效了。静态注册无需担忧广播接收器是否被关闭,只要设备是开启状态,广播接收器也是打开着的。也就是说哪怕app本身未启动,该app订阅的广播在触发时也会对它起作用.</p>
+</li>
+</ul>
+<p>系统常见广播Intent,如开机启动、电池电量变化、时间改变等广播.</p>
+<h2 id="3、Service服务">3、Service服务</h2>
+<p>一个Service是一段长生命周期的，没有用户界面的程序，可以用来开发如监控类程序。</p>
+<p>比较好的一个例子就是一个正在从播放列表中播放歌曲的媒体播放器。在一个媒体播放器的应用中，应该会有多个activity，让使用者可以选择歌曲并播放歌曲。然而，音乐重放这个功能并没有对应的activity，因为使用者当然会认为在导航到其它屏幕时音乐应该还在播放的。在这个例子中，媒体播放器这个activity会使用Context.startService()来启动一个service，从而可以在后台保持音乐的播放。同时，系统也将保持这个service一直执行，直到这个service运行结束。另外，我们还可以通过使用Context.bindService()方法，连接到一个service上（如果这个service还没有运行将启动它）。当连接到一个service之后，我们还可以使用service提供的接口与它进行通讯。拿媒体播放器这个例子来说，我们还可以进行暂停、重播等操作。</p>
+<p>Service使用步骤如下：</p>
+<pre><code>   1、继承service类
+   2、AndroidManifast.xml配置清单文件中<span class="tag">&lt;<span class="title">application</span>&gt;</span>节点里对服务进行配置
+         <span class="tag">&lt;<span class="title">service</span> <span class="attribute">name</span>=<span class="value">".SMSService"</span>/&gt;</span>
+</code></pre><p>服务不能自己运行,需要通过Contex.startService()或Contex.bindService()启动服务。</p>
+<p>通过startService()方法启动的服务与调用者没有关系,即使调用者关闭了,服务仍然运行。想停止服务要调用Context.stopService(),此时系统会调用onDestory(),使用此方法启动时,服务首次启动系统，先调用服务的onCreate()—&gt;onStart(),如果服务已经启动再次调用只会触发onStart()方法。</p>
+<p>使用bindService()启动的服务与调用者绑定,只要调用者关闭,服务就终止,使用此方法启动时,服务首次启动,系统先调用服务的onCreate()—&gt;onBind(),如果服务已经启动再次调用不会再触发这2个方法,调用者退出时系统会调用服务的onUnbind()—&gt;onDestory(),想主动解除绑定可使用Contex.unbindService(),系统依次调用onUnbind()—&gt;onDestory();</p>
+<h2 id="4、Content_Provider内容提供者">4、Content Provider内容提供者</h2>
+<p>android平台提供了Content Provider使一个应用程序的指定数据集提供给其他应用程序。这些数据可以存储在文件系统中、在一个SQLite数据库、或以任何其他合理的方式,其他应用可以通过ContentResolver类(见ContentProviderAccessApp例子)从该内容提供者中获取或存入数据.(相当于在应用外包了一层壳)。只有需要在多个应用程序间共享数据时才需要内容提供者。例如，通讯录数据被多个应用程序使用，且必须存储在一个内容提供者中。它的好处:统一数据访问方式。</p>
+<ul>
+<li><p>android系统自带的内容提供者(顶级的表示数据库名,非顶级的都是表名)，这些内容提供者在SDK文档的reference下的android.provider的包中都有介绍。见<a href="http://developer.android.com/reference/android/provider/package-summary.html" target="_blank" rel="external">这里</a></p>
+<ul>
+<li>CallLog：地址和接收到的电话信息</li>
+<li>Contact.People.Phones：存储电话号码</li>
+<li>Setting.System：系统设置和偏好设置</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用Content Provider对外共享数据的步骤</strong></p>
+<p>1、继承ContentProvider类并根据需求重写以下方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreate</span>();<span class="comment">//处理初始化操作</span></div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 插入数据到内容提供者(允许其他应用向你的应用中插入数据时重写)</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> *<span class="javadoctag"> @param</span> initialValues 插入的数据</div><div class="line"> *<span class="javadoctag"> @return</span></div><div class="line"> */</div><div class="line"><span class="keyword">public</span> Uri <span class="title">insert</span>(Uri uri, ContentValues initialValues);</div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 从内容提供者中删除数据(允许其他应用删除你应用的数据时重写)</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> *<span class="javadoctag"> @param</span> selection 条件语句</div><div class="line"> *<span class="javadoctag"> @param</span> selectionArgs 参数</div><div class="line"> *<span class="javadoctag"> @return</span></div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span>(Uri uri, String selection, String[] selectionArgs);</div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 更新内容提供者已存在的数据(允许其他应用更新你应用的数据时重写)</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> *<span class="javadoctag"> @param</span> values 更新的数据</div><div class="line"> *<span class="javadoctag"> @param</span> selection 条件语句</div><div class="line"> *<span class="javadoctag"> @param</span> selectionArgs 参数</div><div class="line"> *<span class="javadoctag"> @return</span></div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span>(Uri uri, ContentValues values, String selection,</div><div class="line">              String[] selectionArgs);</div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 返回数据给调用者(允许其他应用从你的应用中获取数据时重写)</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> *<span class="javadoctag"> @param</span> projection 列名</div><div class="line"> *<span class="javadoctag"> @param</span> selection 条件语句</div><div class="line"> *<span class="javadoctag"> @param</span> selectionArgs 参数</div><div class="line"> *<span class="javadoctag"> @param</span> sortOrder 排序</div><div class="line"> *<span class="javadoctag"> @return</span></div><div class="line"> */</div><div class="line"><span class="keyword">public</span> Cursor <span class="title">query</span>(Uri uri, String[] projection, String selection,</div><div class="line">              String[] selectionArgs, String sortOrder) ;         </div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 用于返回当前Uri所代表数据的MIME类型</div><div class="line"> * 如果操作的数据为集合类型(多条数据),那么返回的类型字符串应该为vnd.android.cursor.dir/开头</div><div class="line"> * 例如要得到所有person记录的Uri为content://com.bravestarr.provider.personprovider/person,</div><div class="line">　　　　 *　　　那么返回的MIME类型字符串应该为"vnd.android.cursor.dir/person"</div><div class="line"> * 如果操作的数据为单一数据,那么返回的类型字符串应该为vnd.android.cursor.item/开头</div><div class="line"> * 例如要得到id为10的person记录的Uri为content://com.bravestarr.provider.personprovider/person/10,</div><div class="line">　　　　 *　　　那么返回的MIME类型字符串应该为"vnd.android.cursor.item/person"</div><div class="line"> *<span class="javadoctag"> @param</span> uri</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> String <span class="title">getType</span>(Uri uri)</div></pre></td></tr></table></figure>
+
+<p>这些方法中的Uri参数,得到后需要进行解析然后做对应处理,Uri表示要操作的数据,包含两部分信息:</p>
+<ul>
+<li>1)需要操作的contentprovider</li>
+<li><p>2)对contentprovider中的什么数据进行操作,一个Uri格式:</p>
+<pre><code> 结构头<span class="symbol">://authorities</span>(域名)/路径(要操作的数据,根据业务而定)
+ <span class="symbol">content:</span>/<span class="regexp">/com.bravestarr.provider.personprovider/person</span><span class="regexp">/10</span>
+</code></pre></li>
+</ul>
+<p>说明：contentprovider的结构头已经由android规定为content://authorities用于唯一标识这个contentprovider程序,外部调用者可以根据这个找到他,路径表示我们要操作的数据,路径的构建根据业务而定。路径格式如下:                                                        </p>
+<ul>
+<li>要操作person表行号为10的记录,可以这样构建/person/10</li>
+<li>要操作person表的所有记录,可以这样构建/person</li>
+</ul>
+<p>2、在AndroidManifest.xml中使用&lt; provider &gt;对ContentProvider进行配置注册(内容提供者注册它自己就像网站注册域名),ContentProvider采用authoritie(原意授权,可理解为域名)作为唯一标识,方便其他应用能找到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;application</div><div class="line">        android:icon="@drawable/ic_launcher"</div><div class="line">        android:label="@string/app_name" &gt;</div><div class="line">        &lt;!-- authorities属性命名建议:公司名.provider.SomeProvider--&gt;</div><div class="line">        &lt;provider android:name=".PersonProvider" android:authorities="com.bravestarr.provider.personprovider"/&gt;</div><div class="line">        ...</div><div class="line">&lt;/application&gt;</div></pre></td></tr></table></figure>
+
+<h1 id="总结：">总结：</h1>
+<h3 id="1、四大组件的注册">1、四大组件的注册</h3>
+<p>四大基本组件都需要注册才能使用,每个Activity、Service、Content Provider都需要在AndroidManifest文件中进行配置。AndroidManifest文件中未进行声明的activity、服务以及内容提供者将不为系统所见，从而也就不可用，而BroadcastReceive广播接收者的注册分静态注册（在AndroidManifest文件中进行配置）和通过代码动态创建并以调用Context.registerReceiver()的方式注册至系统。需要注意的是在AndroidManifest文件中进行配置的广播接收者会随系统的启动而一直处于活跃状态,只要接收到感兴趣的广播就会触发（即使程序未运行）。</p>
+<p>AndroidManifest文件中进行注册格式如下：</p>
+<ul>
+<li><activity\>元素的name 属性指定了实现了这个activity 的Activity 的子类。icon 和label 属性指向了包含展示给用户的此activity 的图标和标签的资源文件。</activity\></li>
+<li><service\> 元素用于声明服务</service\></li>
+<li><receiver\> 元素用于声明广播接收器</receiver\></li>
+<li><provider\> 元素用于声明内容提供者</provider\></li>
+</ul>
+<h3 id="2、四大组件的激活">2、四大组件的激活</h3>
+<p>• ContentProvider的激活：当接收到ContentResolver 发出的请求后，内容提供者被激活。而其它三种组件──activity、服务和广播接收器被一种叫做intent 的异步消息所激活。</p>
+<p>• Activity的激活：通过传递一个Intent 对象至Context.startActivity()或Activity.startActivityForResult()以载入（或指定新工作给）一个activity。相应的activity 可以通过调用getIntent() 方法来查看激活它的intent。如果它期望它所启动的那个activity 返回一个结果，它会以调用startActivityForResult()来取代startActivity()。比如说，如果它启动了另外一个Activity 以使用户挑选一张照片，它也许想知道哪张照片被选中了。结果将会被封装在一个Intent 对象中，并传递给发出调用的activity 的onActivityResult() 方法。</p>
+<p>• Service的激活：可以通过传递一个Intent 对象至Context.startService()或Context.bindService()前者Android 调用服务的onStart()方法并将Intent 对象传递给它，后者Android 调用服务的onBind()方法将这个Intent 对象传递给它。</p>
+<p>• BroadCastReceiver的激活：我们可以通过传递一个Intent对象来给Context.sendBroadcast()、Context.sendOrderedBroadcast()或Context.sendStickyBroadcast()来发送广播，Android会调用所有对此广播有兴趣的广播接收器的onReceive()方法，将intent传递给它们。</p>
+<h3 id="3、四大组件的关闭">3、四大组件的关闭</h3>
+<p>内容提供者仅在响应ContentResolver提出请求的时候激活。而一个广播接收器仅在响应广播信息的时候激活。所以，没有必要去显式的关闭这些组件。</p>
+<p>Activity关闭：可以通过调用它的finish()方法来关闭一个activity。</p>
+<p>服务关闭：对于通过startService()方法启动的服务要调用Context.stopService()方法关闭服务，使用bindService()方法启动的服务要调用Contex.unbindService()方法关闭服务。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Android/">Android</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/四大组件/">四大组件</a>, <a href="/tags/Intent/">Intent</a>, <a href="/tags/生命周期/">生命周期</a>, <a href="/tags/回顾总结/">回顾总结</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    <a href="/2014/11/17/Android之ContentProvider/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2014/11/09/Android异步消息机制完全解析/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+  <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"jackhai"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>4</small></li>
+  
+    <li><a href="/categories/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/gitcafe/">gitcafe</a><small>1</small></li>
+  
+    <li><a href="/categories/转载/">转载</a><small>2</small></li>
+  
+    <li><a href="/categories/随记/">随记</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>2</small></li>
+  
+    <li><a href="/tags/ContentProvider/">ContentProvider</a><small>1</small></li>
+  
+    <li><a href="/tags/Handler/">Handler</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Intent/">Intent</a><small>1</small></li>
+  
+    <li><a href="/tags/LifeCycle/">LifeCycle</a><small>1</small></li>
+  
+    <li><a href="/tags/ListView/">ListView</a><small>1</small></li>
+  
+    <li><a href="/tags/Looper/">Looper</a><small>1</small></li>
+  
+    <li><a href="/tags/Message/">Message</a><small>1</small></li>
+  
+    <li><a href="/tags/MessageQueue/">MessageQueue</a><small>1</small></li>
+  
+    <li><a href="/tags/SSD/">SSD</a><small>1</small></li>
+  
+    <li><a href="/tags/Shelves-app/">Shelves app</a><small>1</small></li>
+  
+    <li><a href="/tags/Uri/">Uri</a><small>1</small></li>
+  
+    <li><a href="/tags/四大组件/">四大组件</a><small>1</small></li>
+  
+    <li><a href="/tags/回顾总结/">回顾总结</a><small>1</small></li>
+  
+    <li><a href="/tags/异步消息/">异步消息</a><small>1</small></li>
+  
+    <li><a href="/tags/文章/">文章</a><small>1</small></li>
+  
+    <li><a href="/tags/生命周期/">生命周期</a><small>1</small></li>
+  
+    <li><a href="/tags/读书/">读书</a><small>1</small></li>
+  
+    <li><a href="/tags/重装系统/">重装系统</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://jackhai.diandian.com/" title="点点">点点</a></li>
+<li><a href="http://jackhai6.lofter.com/" title=">Lofter">Lofter以前</a></li>
+<li><a href="http://jackhai789.lofter.com/" title="Lofter">Lofter现在</a></li>
+<li><a href="http://www.cnblogs.com/jackhai9/" title="博客园">博客园</a></li>
+<li><a href="http://www.u148.net/u/167902" title="U148">U148</a></li>
+<li><a href="http://jackhai.wordpress.com/" title="WordPress">WordPress</a></li>
+<li><a href="http://jackhai9.blogspot.com/" title="Blogger">Blogger</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 李振海
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
